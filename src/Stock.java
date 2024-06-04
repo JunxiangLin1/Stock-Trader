@@ -1,3 +1,2 @@
-public class Stock {
-  your mom
+public interface Stock {
 }

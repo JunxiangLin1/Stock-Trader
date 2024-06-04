@@ -1,2 +1,14 @@
-public class Date {
+public interface Date {
+  int hashCode();
+
+  int compareTo(Date otherDate);
+
+  boolean equals(Object other);
+
+  int getMonth();
+
+  int getYear();
+
+  int getDay();
+
 }

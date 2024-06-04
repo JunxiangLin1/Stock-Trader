@@ -1,2 +1,2 @@
-public class Portfolio {
+public interface Portfolio {
 }
