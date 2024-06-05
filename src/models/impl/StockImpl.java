@@ -1,7 +1,12 @@
+package models.impl;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import models.Date;
+import models.Stock;
 
 public class StockImpl implements Stock {
   String ticker;

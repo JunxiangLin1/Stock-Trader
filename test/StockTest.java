@@ -4,6 +4,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Date;
+import models.impl.DateImpl;
+import models.Stock;
+import models.impl.StockImpl;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;

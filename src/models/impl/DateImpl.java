@@ -1,4 +1,8 @@
-public class DateImpl implements Date{
+package models.impl;
+
+import models.Date;
+
+public class DateImpl implements Date {
 
   private int day;
   private int month;
@@ -6,10 +10,10 @@ public class DateImpl implements Date{
   private final String date;
 
   /**
-   * Construct a {@code DateImpl} object.
+   * Construct a {@code models.impl.DateImpl} object.
    *
    * @param date the date in question as a formatted string
-   * @throws IllegalArgumentException if the Date is not valid
+   * @throws IllegalArgumentException if the models.Date is not valid
    */
   public DateImpl(String date) {
     this.date = date;
@@ -85,7 +89,7 @@ public class DateImpl implements Date{
   /**
    * Advances the MyDate by the given days and stops if advances before 1 Jan 0000.
    *
-   * @param days the amount of days the Date will shift by
+   * @param days the amount of days the models.Date will shift by
    */
   public void advance(int days) {
     this.shiftDay(days);

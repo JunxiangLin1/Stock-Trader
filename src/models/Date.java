@@ -1,3 +1,5 @@
+package models;
+
 public interface Date {
   int hashCode();
 
