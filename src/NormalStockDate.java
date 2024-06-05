@@ -36,6 +36,29 @@ public class NormalStockDate implements Date{
   }
 
   @Override
+  public int hashCode() {
+    int result = Integer.hashCode(getYear());
+    result = 31 * result + Integer.hashCode(getMonth());
+    result = 31 * result + Integer.hashCode(getDay());
+    return result;
+  }
+
+  @Override
+  public int compareTo(Date other) {
+    int yearComparison = Integer.compare(this.getYear(), other.getYear());
+    if (yearComparison != 0) {
+      return yearComparison;
+    }
+
+    int monthComparison = Integer.compare(this.getMonth(), other.getMonth());
+    if (monthComparison != 0) {
+      return monthComparison;
+    }
+
+    return Integer.compare(this.getDay(), other.getDay());
+  }
+
+  @Override
   public String toString() {
     return date;
   }
