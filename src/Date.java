@@ -11,4 +11,6 @@ public interface Date {
 
   int getDay();
 
+  void advance(int days);
+
 }

@@ -7,15 +7,15 @@ import static org.junit.Assert.assertTrue;
 
 public class DateTest {
 
-  NormalStockDate testDate1;
-  NormalStockDate testDate2;
-  NormalStockDate testDate3;
+  DateImpl testDate1;
+  DateImpl testDate2;
+  DateImpl testDate3;
 
   @Before
   public void setup() {
-    testDate1 = new NormalStockDate("12/13/2014");
-    testDate2 = new NormalStockDate("12/13/2014");
-    testDate3 = new NormalStockDate("11/13/2014");
+    testDate1 = new DateImpl("12/13/2014");
+    testDate2 = new DateImpl("12/13/2014");
+    testDate3 = new DateImpl("11/13/2014");
   }
 
   @Test
