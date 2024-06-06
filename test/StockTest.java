@@ -25,11 +25,11 @@ public class StockTest {
 
   @Before
   public void setup() {
-    testDate1 = new DateImpl("11/13/2014");
-    testDate2 = new DateImpl("11/14/2014");
-    testDate3 = new DateImpl("11/15/2014");
-    testDate4 = new DateImpl("12/13/2014");
-    testDate5 = new DateImpl("12/14/2014");
+    testDate1 = new DateImpl("2014-11-13");
+    testDate2 = new DateImpl("2014-11-14");
+    testDate3 = new DateImpl("2014-11-14");
+    testDate4 = new DateImpl("2014-12-13");
+    testDate5 = new DateImpl("2014-12-14");
     stock1 = new StockImpl("META");
     stock2 = new StockImpl("MSFT");
     stock1.addDate(testDate1, 2, 3);
@@ -68,13 +68,19 @@ public class StockTest {
     stock2.addDate(testDate1, 6, 5);
     stock2.addDate(testDate2, 5, 4);
     stock2.addDate(testDate3, 4, 3);
-    stock2.addDate(new DateImpl("11/16/2014"), 3, 4);
-    stock2.addDate(new DateImpl("11/17/2014"), 4, 5);
+    stock2.addDate(new DateImpl("2014-11-16"), 3, 4);
+    stock2.addDate(new DateImpl("2014-11-17"), 4, 5);
 
     expectedDates = new ArrayList<Date>(List.of(
-            new DateImpl("11/16/2014"),
-            new DateImpl("11/17/2014")));
+            new DateImpl("2014-11-16"),
+            new DateImpl("2014-11-17")));
 
-    assertEquals(expectedDates, stock2.xDayCrossovers(testDate2, new DateImpl("11/17/2014"), 2));
+    assertEquals(expectedDates, stock2.xDayCrossovers(testDate2, new DateImpl("2014-11-17"), 2));
+  }
+
+  @Test
+  public void testReadInputFromAPI() {
+    stock1.populateStockData();
+    assertEquals(4, stock1.getClose(new DateImpl("2024-06-05")), 0.01);
   }
 }

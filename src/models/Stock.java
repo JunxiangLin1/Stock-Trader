@@ -1,5 +1,6 @@
 package models;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface Stock {
@@ -17,4 +18,6 @@ public interface Stock {
   double getClose(Date day);
 
   double getOpen(Date day);
+
+  public void populateStockData();
 }

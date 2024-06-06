@@ -115,6 +115,7 @@ public class StockImpl implements Stock {
         char character = (char)b;
         output.append(character);
       }
+      System.out.println(output);
       // Write to CSV
       try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
         writer.write(output.toString());
@@ -126,12 +127,20 @@ public class StockImpl implements Stock {
     }
   }
 
-  private void readStockInfoCSV() throws FileNotFoundException {
+  private void readStockInfoCSV() {
     List<List<String>> records = new ArrayList<>();
-    Scanner scanner = new Scanner(new File("test.csv"));
+    try(Scanner scanner = new Scanner(new File("test.csv"))) {
+      System.out.println("FirstLine: " + scanner.nextLine());
+      System.out.println("SecondLine: " + scanner.nextLine());
+      System.out.println("ThirdLine: " + scanner.nextLine());
       while (scanner.hasNextLine()) {
-        this.readStockInfoRow(scanner.nextLine());
+        String line = scanner.nextLine();
+        System.out.println("NextLine: " + line);
+        this.readStockInfoRow(line);
       }
+    } catch (FileNotFoundException e) {
+      throw new InternalError("Read and write files are mismatched.");
+    }
   }
 
   private void readStockInfoRow(String line) {
@@ -143,7 +152,7 @@ public class StockImpl implements Stock {
   }
 
   private InputStream getAPIInputStream() {
-    String apiKey = "OMS6CJPTPC6RP2PW";
+    String apiKey = "DR9Y7T4OGF18HDFA";
     URL url;
     try {
       url = new URL("https://www.alphavantage"
@@ -163,10 +172,8 @@ public class StockImpl implements Stock {
     }
   }
 
-  private void populateStockData() throws FileNotFoundException {
+  public void populateStockData() {
     this.makeStockInfoCSV(this.getAPIInputStream());
     this.readStockInfoCSV();
   }
-
-
 }
