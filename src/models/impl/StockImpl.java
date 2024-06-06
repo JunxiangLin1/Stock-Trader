@@ -131,8 +131,6 @@ public class StockImpl implements Stock {
     List<List<String>> records = new ArrayList<>();
     try(Scanner scanner = new Scanner(new File("test.csv"))) {
       System.out.println("FirstLine: " + scanner.nextLine());
-      System.out.println("SecondLine: " + scanner.nextLine());
-      System.out.println("ThirdLine: " + scanner.nextLine());
       while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
         System.out.println("NextLine: " + line);
@@ -152,7 +150,7 @@ public class StockImpl implements Stock {
   }
 
   private InputStream getAPIInputStream() {
-    String apiKey = "DR9Y7T4OGF18HDFA";
+    String apiKey = "BYAZRVQYKZU9H4X6";
     URL url;
     try {
       url = new URL("https://www.alphavantage"
