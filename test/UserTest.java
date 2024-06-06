@@ -3,14 +3,15 @@ import org.junit.Test;
 
 import models.Portfolio;
 import models.Stock;
+import models.User;
 import models.impl.DateImpl;
 import models.impl.PortfolioImpl;
 import models.impl.StockImpl;
+import models.impl.UserImpl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
-public class PortfolioTest {
+public class UserTest {
   DateImpl testDate1;
   DateImpl testDate2;
   DateImpl testDate3;
@@ -20,6 +21,8 @@ public class PortfolioTest {
   Stock stock2;
   Stock emptyStock;
   Portfolio portfolio1;
+  Portfolio emptyPortfolio;
+  User user1;
 
   @Before
   public void setup() {
@@ -42,21 +45,25 @@ public class PortfolioTest {
     stock2.addDate(new DateImpl("11/16/2014"), 3, 4);
     stock2.addDate(new DateImpl("11/17/2014"), 4, 5);
     portfolio1 = new PortfolioImpl();
+    emptyPortfolio = new PortfolioImpl();
     portfolio1.addStock(stock1);
     portfolio1.addStock(stock2);
+    user1 = new UserImpl();
+    user1.createPortfolio("PortoOne");
+    user1.createPortfolio("PortoTwo");
+
   }
 
   @Test
-  public void addStockAddedCorrectlyAndGotStockCorrectly() {
-    assertEquals(stock1, portfolio1.getStock(stock1.getTicker()));
-    assertEquals(stock2, portfolio1.getStock(stock2.getTicker()));
-    Exception exception = assertThrows(IllegalArgumentException.class,
-            () -> portfolio1.getStock(emptyStock.getTicker()));
-    assertEquals("Not in list bitch", exception.getMessage());
+  public void createPortfolioPutCorrectEmptyPortfolioIntoUser() {
+    assertEquals(emptyPortfolio, user1.getPortfolio("PortoOne"));
+    assertEquals(emptyPortfolio, user1.getPortfolio("PortoTwo"));
   }
 
   @Test
-  public void getValueReturnstheRightNumber() {
-    assertEquals(8, portfolio1.getValue(testDate1), 0.00001);
+  public void createPortfolioPutCorrectNonEmptyPortfolioIntoUser() {
+    user1.addStockToPortfolio("PortoOne", stock1);
+    user1.addStockToPortfolio("PortoOne", stock2);
+    assertEquals(portfolio1, user1.getPortfolio("PortoOne"));
   }
 }

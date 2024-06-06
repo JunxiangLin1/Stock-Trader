@@ -2,6 +2,7 @@ package models.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import models.Date;
 import models.Portfolio;
@@ -22,7 +23,11 @@ public class PortfolioImpl implements Portfolio {
 
   @Override
   public Stock getStock(String ticker) {
-    return this.stocks.get(ticker);
+    if (!this.stocks.containsKey(ticker)) {
+      throw new IllegalArgumentException("Not in list bitch");
+    } else {
+      return this.stocks.get(ticker);
+    }
   }
 
   @Override
@@ -32,6 +37,18 @@ public class PortfolioImpl implements Portfolio {
       value += stock.getClose(date);
     }
     return value;
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof PortfolioImpl) {
+      PortfolioImpl otherPortfolioImpl = (PortfolioImpl) other;
+      if (this == otherPortfolioImpl) {
+        return true;
+      }
+      return this.stocks.equals(otherPortfolioImpl.stocks);
+    }
+    return false;
   }
 
 }

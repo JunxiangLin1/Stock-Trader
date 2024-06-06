@@ -118,10 +118,10 @@ public class DateImpl implements Date {
   @Override
   public boolean equals(Object other) {
     if (other instanceof DateImpl) {
-      DateImpl otherNormalStockDate = (DateImpl) other;
-      return this.getYear() == otherNormalStockDate.getYear()
-              && this.getMonth() == otherNormalStockDate.getMonth()
-              && this.getDay() == otherNormalStockDate.getDay();
+      DateImpl otherDateImpl = (DateImpl) other;
+      return this.getYear() == otherDateImpl.getYear()
+              && this.getMonth() == otherDateImpl.getMonth()
+              && this.getDay() == otherDateImpl.getDay();
     }
     return false;
   }
