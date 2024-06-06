@@ -17,10 +17,10 @@ public class DateImpl implements Date {
    */
   public DateImpl(String date) {
     this.date = date;
-    String[] parts = date.split("/");
-    this.day = Integer.parseInt(parts[1]);
-    this.month = Integer.parseInt(parts[0]);
-    this.year = Integer.parseInt(parts[2]);
+    String[] parts = date.split("-");
+    this.day = Integer.parseInt(parts[2]);
+    this.month = Integer.parseInt(parts[1]);
+    this.year = Integer.parseInt(parts[0]);
     if (!this.isValid()) {
       throw new IllegalArgumentException("SMH, Skill issue bruh, your mom is INVALID!!!");
     }
@@ -150,6 +150,6 @@ public class DateImpl implements Date {
 
   @Override
   public String toString() {
-    return String.format("%02d/%02d/%04d", this.month, this.day, this.year);
+    return String.format("%04d-%02d-%02d", this.year, this.month, this.day);
   }
 }

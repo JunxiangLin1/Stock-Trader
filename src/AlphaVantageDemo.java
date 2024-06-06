@@ -91,8 +91,8 @@ public class AlphaVantageDemo {
       }
     }
     catch (IOException e) {
-      throw new IllegalArgumentException("No price data found for "+ stockSymbol);
+      throw new IllegalArgumentException("No price data found for " + stockSymbol);
     }
-    System.out.println(stock.getClose(new DateImpl("2024/06/05")));
+    System.out.println(stock.getClose(new DateImpl("2024-06-05")));
   }
 }
