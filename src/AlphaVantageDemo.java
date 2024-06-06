@@ -3,14 +3,22 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import models.InputDataType;
+import models.Stock;
+import models.impl.DateImpl;
+import models.impl.StockImpl;
+
 public class AlphaVantageDemo {
   public static void main(String []args) {
+
+    Stock stock = new StockImpl("GOOG");
     //the API key needed to use this web service.
     //Please get your own free API key here: https://www.alphavantage.co/
     //Please look at documentation here: https://www.alphavantage.co/documentation/
-    String apiKey = "W0M1JOKC82EZEQA8";
-    String stockSymbol = "GOOG"; //ticker symbol for Google
-    URL url = null;
+    String apiKey = "DR9Y7T4OGF18HDFA";
+    String stockSymbol = stock.getTicker(); //ticker symbol for Google
+    InputDataType inputDataType = InputDataType.TIMESTAMP;
+    URL url;
 
     try {
       /*
@@ -45,16 +53,46 @@ public class AlphaVantageDemo {
       This is printed below.
        */
       in = url.openStream();
+
       int b;
 
+      Appendable date = new StringBuilder();
+      Appendable open = new StringBuilder();
+      Appendable close = new StringBuilder();
+      boolean isFirstLine = true;
+
       while ((b=in.read())!=-1) {
-        output.append((char)b);
+        char character = (char)b;
+        System.out.print(character);
+        if (character == ',' || character == '\n' || character == '\r') {
+          inputDataType = inputDataType.next();
+          if (inputDataType == InputDataType.TIMESTAMP) {
+            if (!isFirstLine) {
+              stock.addDate(
+                      new DateImpl(date.toString()),
+                      Double.parseDouble(open.toString()),
+                      Double.parseDouble(close.toString()));
+              date = new StringBuilder();
+              open = new StringBuilder();
+              close = new StringBuilder();
+            }
+            isFirstLine = false;
+          }
+        } else if (!isFirstLine) {
+          System.out.print(date.toString());
+          if (inputDataType == InputDataType.TIMESTAMP) {
+            date.append(character);
+          } else if (inputDataType == InputDataType.CLOSE) {
+            close.append(character);
+          } else if (inputDataType == InputDataType.OPEN) {
+            open.append(character);
+          }
+        }
       }
     }
     catch (IOException e) {
-      throw new IllegalArgumentException("No price data found for "+stockSymbol);
+      throw new IllegalArgumentException("No price data found for "+ stockSymbol);
     }
     System.out.println("Return value: ");
-    System.out.println(output.toString());
   }
 }
