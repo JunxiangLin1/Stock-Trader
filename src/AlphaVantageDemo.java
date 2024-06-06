@@ -15,7 +15,7 @@ public class AlphaVantageDemo {
     //the API key needed to use this web service.
     //Please get your own free API key here: https://www.alphavantage.co/
     //Please look at documentation here: https://www.alphavantage.co/documentation/
-    String apiKey = "DR9Y7T4OGF18HDFA";
+    String apiKey = "OMS6CJPTPC6RP2PW";
     String stockSymbol = stock.getTicker(); //ticker symbol for Google
     InputDataType inputDataType = InputDataType.TIMESTAMP;
     URL url;
@@ -79,7 +79,7 @@ public class AlphaVantageDemo {
             isFirstLine = false;
           }
         } else if (!isFirstLine) {
-          System.out.print(date.toString());
+          System.out.print(inputDataType == InputDataType.OPEN);
           if (inputDataType == InputDataType.TIMESTAMP) {
             date.append(character);
           } else if (inputDataType == InputDataType.CLOSE) {
@@ -93,6 +93,6 @@ public class AlphaVantageDemo {
     catch (IOException e) {
       throw new IllegalArgumentException("No price data found for "+ stockSymbol);
     }
-    System.out.println("Return value: ");
+    System.out.println(stock.getClose(new DateImpl("2024/06/05")));
   }
 }

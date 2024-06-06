@@ -4,8 +4,9 @@ package controllers;
 import java.io.IOException;
 import java.util.Scanner;
 
+import models.Stock;
 import models.User;
-
+import models.impl.StockImpl;
 
 
 public class StockGameController {
@@ -42,7 +43,7 @@ public class StockGameController {
         user.createPortfolio(sc.next());
         break;
       case "add-stock-to-portfolio":
-        user.addStockToPortfolio(sc.next(), sc.next());
+        user.addStockToPortfolio(sc.next(), new StockImpl(sc.next()));
         break;
       case "analyze-gain-or-loss":
         break;
