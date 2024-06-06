@@ -22,11 +22,18 @@ public class StockImpl implements Stock {
     this.days.put(date, new ArrayList<Double>(List.of(open, close)));
   }
 
-  private double getClose(Date day) {
+  @Override
+  public String getTicker() {
+    return this.ticker;
+  }
+
+  @Override
+  public double getClose(Date day) {
     return this.days.get(day).get(1);
   }
 
-  private double getOpen(Date day) {
+  @Override
+  public double getOpen(Date day) {
     return this.days.get(day).get(0);
   }
 
@@ -90,4 +97,6 @@ public class StockImpl implements Stock {
     }
     return dates;
   }
+
+
 }

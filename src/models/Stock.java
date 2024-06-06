@@ -11,4 +11,10 @@ public interface Stock {
   List<Date> xDayCrossovers(Date start, Date end, int day);
 
   void addDate(Date date, double open, double close);
+
+  String getTicker();
+
+  double getClose(Date day);
+
+  double getOpen(Date day);
 }
