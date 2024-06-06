@@ -2,10 +2,14 @@ package controllers;
 
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
+import models.Date;
+import models.Portfolio;
 import models.Stock;
 import models.User;
+import models.impl.DateImpl;
 import models.impl.StockImpl;
 
 
@@ -41,16 +45,29 @@ public class StockGameController {
     switch (userInstruction.toLowerCase()) {
       case "create-portfolio":
         user.createPortfolio(sc.next());
+        append("Created Portfolio.");
         break;
       case "add-stock-to-portfolio":
         user.addStockToPortfolio(sc.next(), new StockImpl(sc.next()));
+        append("Added Stock.");
         break;
       case "analyze-gain-or-loss":
+        boolean inc = user.getPortfolio(sc.next()).getStock(sc.next())
+                .increase(new DateImpl(sc.next()), new DateImpl(sc.next()));
+        if (inc) {
+          append("Increased.");
+        } else {
+          append("Did not increase.");
+        }
         break;
       case "analyze-x-day-crossover":
+        List<Date> crosses = user.getPortfolio(sc.next()).getStock(sc.next()).xDayCrossovers(new DateImpl(sc.next()), new DateImpl(sc.next()), Integer.parseInt(sc.next()));
+        for (int i  = 0; i <= crosses.size(); i++) {
+          append(crosses.get(i).toString());
+        }
         break;
       default:
-        append("Invalid command. Please try again.");
+        append("Invalid command. Try again.");
     }
   }
 
