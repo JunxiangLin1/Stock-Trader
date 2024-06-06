@@ -17,7 +17,6 @@ public class StockGameController {
   private Readable readable;
   private Appendable appendable;
   private User user;
-  private static final String apiKey = "OMS6CJPTPC6RP2PW";
 
 
   public StockGameController(Readable readable, Appendable appendable, User user) {
@@ -32,9 +31,10 @@ public class StockGameController {
   public void control() throws IOException {
     Scanner scanner = new Scanner(readable);
     while (true) {
-      append("Enter command: ");
+      writeMessage("Enter command: ");
       String command = scanner.nextLine();
       if (command.equalsIgnoreCase("exit")) {
+        farewellMessage();
         break;
       }
       processCommands(scanner, user, command);
@@ -46,33 +46,63 @@ public class StockGameController {
     switch (userInstruction.toLowerCase()) {
       case "create-portfolio":
         user.createPortfolio(sc.next());
-        append("Created Portfolio.");
+        writeMessage("Created Portfolio.");
         break;
       case "add-stock-to-portfolio":
         user.addStockToPortfolio(sc.next(), new StockImpl(sc.next()));
-        append("Added Stock.");
+        writeMessage("Added Stock.");
         break;
       case "analyze-gain-or-loss":
         boolean inc = user.getPortfolio(sc.next()).getStock(sc.next())
                 .increase(new DateImpl(sc.next()), new DateImpl(sc.next()));
         if (inc) {
-          append("Increased.");
+          writeMessage("Increased.");
         } else {
-          append("Did not increase.");
+          writeMessage("Did not increase.");
         }
         break;
       case "analyze-x-day-crossover":
         List<Date> crosses = user.getPortfolio(sc.next()).getStock(sc.next()).xDayCrossovers(new DateImpl(sc.next()), new DateImpl(sc.next()), Integer.parseInt(sc.next()));
         for (int i  = 0; i <= crosses.size(); i++) {
-          append(crosses.get(i).toString());
+          writeMessage(crosses.get(i).toString());
         }
         break;
+      case "menu":
+        welcomeMessage();
+        printMenu();
       default:
-        append("Invalid command. Try again.");
+        writeMessage("Invalid command. Try again.");
     }
   }
 
-  private void append(String message) throws IOException {
-      appendable.append(message).append("\n");
+  protected void writeMessage(String message) throws IllegalStateException {
+    try {
+      appendable.append(message).append(System.lineSeparator());
+
+    } catch (IOException e) {
+      throw new IllegalStateException(e.getMessage());
+    }
+  }
+
+  protected void printMenu() throws IllegalStateException {
+    writeMessage("Supported user instructions are: ");
+    writeMessage("create-portfolio portfolio-name " +
+            "(create a portfolio of the given name)");
+    writeMessage("add-stock-to-portfolio portfolio-name stock-ticker " +
+            "(adds a stock of the given ticker to the designated portfolio)");
+    writeMessage("analyze-gain-or-loss portfolio-name stock-ticker start-date(YYYY-MM-DD) " +
+            "end-date(YYYY-MM-DD) " +
+            "(analyses whether or not the given stock increased in price within the date range)");
+    writeMessage("menu (Print supported instruction list)");
+    writeMessage("exit (quit the program) ");
+  }
+
+  protected void welcomeMessage() throws IllegalStateException {
+    writeMessage("Welcome to the Stock Game!");
+    printMenu();
+  }
+
+  protected void farewellMessage() throws IllegalStateException {
+    writeMessage("Thank you for using this program!");
   }
 }
