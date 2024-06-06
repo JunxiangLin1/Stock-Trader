@@ -17,6 +17,7 @@ public class StockGameController {
   private Readable readable;
   private Appendable appendable;
   private User user;
+  private static final String apiKey = "OMS6CJPTPC6RP2PW";
 
 
   public StockGameController(Readable readable, Appendable appendable, User user) {
@@ -74,5 +75,4 @@ public class StockGameController {
   private void append(String message) throws IOException {
       appendable.append(message).append("\n");
   }
-
 }

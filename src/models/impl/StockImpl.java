@@ -1,11 +1,20 @@
 package models.impl;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import models.Date;
+import models.InputDataType;
 import models.Stock;
 
 public class StockImpl implements Stock {
@@ -96,6 +105,67 @@ public class StockImpl implements Stock {
       currentDate.advance(1);
     }
     return dates;
+  }
+
+  private void makeStockInfoCSV(InputStream in) {
+    StringBuilder output = new StringBuilder();
+    int b;
+    try {
+      while ((b=in.read())!=-1) {
+        char character = (char)b;
+        output.append(character);
+      }
+      // Write to CSV
+      try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+        writer.write(output.toString());
+      } catch (FileNotFoundException e) {
+        throw new FileNotFoundException("CSV file not found.");
+      }
+    } catch (IOException e) {
+      throw new IllegalArgumentException("No price data found for " + this.getTicker());
+    }
+  }
+
+  private void readStockInfoCSV() throws FileNotFoundException {
+    List<List<String>> records = new ArrayList<>();
+    Scanner scanner = new Scanner(new File("test.csv"));
+      while (scanner.hasNextLine()) {
+        this.readStockInfoRow(scanner.nextLine());
+      }
+  }
+
+  private void readStockInfoRow(String line) {
+    String[] stockInfo = line.split(",");
+    this.addDate(
+            new DateImpl(stockInfo[0]),
+            Double.parseDouble(stockInfo[1]),
+            Double.parseDouble(stockInfo[4]));
+  }
+
+  private InputStream getAPIInputStream() {
+    String apiKey = "OMS6CJPTPC6RP2PW";
+    URL url;
+    try {
+      url = new URL("https://www.alphavantage"
+              + ".co/query?function=TIME_SERIES_DAILY"
+              + "&outputsize=full"
+              + "&symbol"
+              + "=" + this.getTicker() + "&apikey=" + apiKey + "&datatype=csv");
+    }
+    catch (MalformedURLException e) {
+      throw new RuntimeException("the alphavantage API has either changed or "
+              + "no longer works");
+    }
+    try {
+      return url.openStream();
+    } catch (IOException e) {
+      throw new IllegalArgumentException("No price data found for " + this.getTicker());
+    }
+  }
+
+  private void populateStockData() throws FileNotFoundException {
+    this.makeStockInfoCSV(this.getAPIInputStream());
+    this.readStockInfoCSV();
   }
 
 

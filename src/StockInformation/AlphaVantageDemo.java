@@ -1,11 +1,18 @@
+package StockInformation;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import models.InputDataType;
 import models.Stock;
-import models.impl.DateImpl;
 import models.impl.StockImpl;
 
 public class AlphaVantageDemo {
@@ -56,43 +63,37 @@ public class AlphaVantageDemo {
 
       int b;
 
-      Appendable date = new StringBuilder();
-      Appendable open = new StringBuilder();
-      Appendable close = new StringBuilder();
-      boolean isFirstLine = true;
-
       while ((b=in.read())!=-1) {
         char character = (char)b;
-        System.out.print(character);
-        if (character == ',' || character == '\n' || character == '\r') {
-          inputDataType = inputDataType.next();
-          if (inputDataType == InputDataType.TIMESTAMP) {
-            if (!isFirstLine) {
-              stock.addDate(
-                      new DateImpl(date.toString()),
-                      Double.parseDouble(open.toString()),
-                      Double.parseDouble(close.toString()));
-              date = new StringBuilder();
-              open = new StringBuilder();
-              close = new StringBuilder();
+        output.append(character);
+      }
+
+      // Write to CSV
+      try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
+        writer.write(output.toString());
+        } catch (FileNotFoundException e) {
+        throw new FileNotFoundException("CSV file not found.");
+      }
+
+      List<String> values = new ArrayList<String>();
+      // Read Data from CSV into Stock
+      try (Scanner scanner = new Scanner(new File("test.csv"));) {
+        while (scanner.hasNextLine()) {
+          Scanner rowScanner = new Scanner(scanner.nextLine());
+            rowScanner.useDelimiter(",?\\r?");
+            while (rowScanner.hasNext()) {
+              values.add(rowScanner.next());
             }
-            isFirstLine = false;
           }
-        } else if (!isFirstLine) {
-          System.out.print(inputDataType == InputDataType.OPEN);
-          if (inputDataType == InputDataType.TIMESTAMP) {
-            date.append(character);
-          } else if (inputDataType == InputDataType.CLOSE) {
-            close.append(character);
-          } else if (inputDataType == InputDataType.OPEN) {
-            open.append(character);
-          }
-        }
+      } catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }
+      for (int i = 7; i < values.size(); i++) {
+        System.out.println(values.get(i));
       }
     }
     catch (IOException e) {
       throw new IllegalArgumentException("No price data found for " + stockSymbol);
     }
-    System.out.println(stock.getClose(new DateImpl("2024-06-05")));
   }
 }

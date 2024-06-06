@@ -1,5 +1,7 @@
 package models.impl;
 
+import java.util.List;
+
 import models.Date;
 
 public class DateImpl implements Date {
@@ -33,15 +35,11 @@ public class DateImpl implements Date {
 
   // Returns the maximum days of the current month
   private int maxDaysOfMonth() {
-    if (this.month == 1 || this.month == 3 || this.month == 5 || this.month == 7 || this.month == 8
-            || this.month == 10 || this.month == 12) {
+    if (List.of(1, 3, 5, 7, 8, 10, 12).contains(this.month)) {
       return 31;
     }
     if (this.month == 2) {
-      if (this.isLeapYear()) {
-        return 29;
-      }
-      return 28;
+      return this.isLeapYear() ? 29 : 28;
     } else {
       return 30;
     }
