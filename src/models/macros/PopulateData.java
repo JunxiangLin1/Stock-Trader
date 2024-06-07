@@ -14,7 +14,7 @@ import java.util.Scanner;
 import models.Stock;
 import models.impl.DateImpl;
 
-public class PopulateDataMacro implements StockMacro<Void> {
+public class PopulateData implements StockMacro<Void> {
   static final String apiKey = "BYAZRVQYKZU9H4X6";
 
   @Override
@@ -31,7 +31,7 @@ public class PopulateDataMacro implements StockMacro<Void> {
               + ".co/query?function=TIME_SERIES_DAILY"
               + "&outputsize=full"
               + "&symbol"
-              + "=" + stock.getTicker() + "&apikey=" + PopulateDataMacro.apiKey + "&datatype=csv");
+              + "=" + stock.getTicker() + "&apikey=" + PopulateData.apiKey + "&datatype=csv");
     }
     catch (MalformedURLException e) {
       throw new RuntimeException("the alphavantage API has either changed or "

@@ -3,11 +3,11 @@ package models.macros;
 import models.Date;
 import models.Stock;
 
-public class IncreaseMacro implements StockMacro<Boolean> {
+public class Increase implements StockMacro<Boolean> {
   Date start;
   Date end;
 
-  public IncreaseMacro(Date start, Date end) {
+  public Increase(Date start, Date end) {
     this.start = start;
     this.end = end;
   }

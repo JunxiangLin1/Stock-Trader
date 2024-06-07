@@ -7,12 +7,12 @@ import models.Date;
 import models.Stock;
 import models.impl.DateImpl;
 
-public class XDayCrossoversMacro implements StockMacro<List<Date>> {
+public class XDayCrossovers implements StockMacro<List<Date>> {
   Date start;
   Date end;
   int day;
 
-  public XDayCrossoversMacro (Date start, Date end, int day) {
+  public XDayCrossovers(Date start, Date end, int day) {
       this.start = start;
       this.end = end;
       this.day = day;
@@ -31,7 +31,7 @@ public class XDayCrossoversMacro implements StockMacro<List<Date>> {
     //While the current date has not reached the end
     while (currentDate.compareTo(end) <= 0) {
       // If the current day's close is greater than the moving average, add it to the dates.
-      StockMacro<Double> movingAverageMacro = new XDayMovingAverageMacro(currentDate, day);
+      StockMacro<Double> movingAverageMacro = new XDayMovingAverage(currentDate, day);
       if (stock.getData().containsKey(currentDate)
               && (stock.getClose(currentDate) > movingAverageMacro.execute(stock))){
         dates.add(new DateImpl(currentDate.toString()));

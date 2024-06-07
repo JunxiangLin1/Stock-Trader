@@ -117,6 +117,9 @@ public class StockGameController {
     writeMessage("analyze-gain-or-loss portfolio-name stock-ticker start-date(YYYY-MM-DD) " +
             "end-date(YYYY-MM-DD) " +
             "(analyses whether or not the given stock increased in price within the date range)");
+    writeMessage("analyze-x-day-moving-average portfolio-name stock-ticker date(YYYY-MM-DD) " +
+            "num-days " +
+            "(returns the average closing value of the previous x days) ");
     writeMessage("analyze-x-day-crossover portfolio-name stock-ticker start-date(YYYY-MM-DD) " +
             "end-date(YYYY-MM-DD) num-days " +
             "(returns all the days within the range where the closing price is greater than the " +

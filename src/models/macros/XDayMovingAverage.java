@@ -4,11 +4,11 @@ import models.Date;
 import models.Stock;
 import models.impl.DateImpl;
 
-public class XDayMovingAverageMacro implements StockMacro<Double> {
+public class XDayMovingAverage implements StockMacro<Double> {
   Date date;
   int days;
 
-  public XDayMovingAverageMacro(Date date, int days) {
+  public XDayMovingAverage(Date date, int days) {
     this.date = date;
     this.days = days;
   }
