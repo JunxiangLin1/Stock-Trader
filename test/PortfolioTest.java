@@ -23,14 +23,14 @@ public class PortfolioTest {
 
   @Before
   public void setup() {
-    testDate1 = new DateImpl("11/13/2014");
-    testDate2 = new DateImpl("11/14/2014");
-    testDate3 = new DateImpl("11/15/2014");
-    testDate4 = new DateImpl("12/13/2014");
-    testDate5 = new DateImpl("12/14/2014");
-    stock1 = new StockImpl("META");
-    stock2 = new StockImpl("MSFT");
-    emptyStock = new StockImpl("EMPTY");
+    testDate1 = new DateImpl("2014-11-13");
+    testDate2 = new DateImpl("2014-11-14");
+    testDate3 = new DateImpl("2014-11-15");
+    testDate4 = new DateImpl("2014-12-13");
+    testDate5 = new DateImpl("2014-12-14");
+    stock1 = new StockImpl("META", 10);
+    stock2 = new StockImpl("MSFT", 10);
+    emptyStock = new StockImpl("EMPTY", 10);
     stock1.addData(testDate1, 2, 3);
     stock1.addData(testDate2, 3, 3);
     stock1.addData(testDate3, 3, 4);
@@ -39,8 +39,8 @@ public class PortfolioTest {
     stock2.addData(testDate1, 6, 5);
     stock2.addData(testDate2, 5, 4);
     stock2.addData(testDate3, 4, 3);
-    stock2.addData(new DateImpl("11/16/2014"), 3, 4);
-    stock2.addData(new DateImpl("11/17/2014"), 4, 5);
+    stock2.addData(new DateImpl("2014-11-16"), 3, 4);
+    stock2.addData(new DateImpl("2014-11-17"), 4, 5);
     portfolio1 = new PortfolioImpl();
     portfolio1.addStock(stock1);
     portfolio1.addStock(stock2);

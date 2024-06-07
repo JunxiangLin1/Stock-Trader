@@ -10,6 +10,8 @@ public interface Stock {
 
   HashMap<Date, List<Double>> getData();
 
+  int getShares();
+
   String getTicker();
 
   double getOpen(Date day);

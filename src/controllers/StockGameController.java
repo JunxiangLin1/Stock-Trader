@@ -2,20 +2,21 @@ package controllers;
 
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
-import models.Stock;
+
+import controllers.commands.AddStockToPortfolio;
+import controllers.commands.AnalyzeGainOrLoss;
+import controllers.commands.AnalyzeXDayCrossover;
+import controllers.commands.CreatePortfolio;
+import controllers.commands.GetValue;
 import models.User;
-import models.Date;
-import models.impl.DateImpl;
-import models.impl.StockImpl;
-import view.StockGameView;
+import views.StockGameView;
 
 
 public class StockGameController {
-  private Readable readable;
-  private User user;
-  private StockGameView view;
+  private final Readable readable;
+  private final User user;
+  private final StockGameView view;
 
   public StockGameController(Readable readable, User user, StockGameView view) {
     if ((user == null) || (readable == null) || (view == null)) {
@@ -44,34 +45,19 @@ public class StockGameController {
   protected void processCommands(Scanner sc, User user, String userInstruction) throws IOException {
     switch (userInstruction.toLowerCase()) {
       case "create-portfolio":
-        user.createPortfolio(sc.next());
-        writeMessage("Created Portfolio.");
+        new CreatePortfolio(sc, user, this.view).execute();
         break;
       case "add-stock-to-portfolio":
-        String portfolioName = sc.next();
-        Stock stock = new StockImpl(sc.next(), sc.nextInt());
-        stock.populateStockData();
-        user.addStockToPortfolio(portfolioName, stock);
-        writeMessage("Added Stock.");
+        new AddStockToPortfolio(sc, user, this.view).execute();
         break;
       case "analyze-gain-or-loss":
-        boolean inc = user.getPortfolio(sc.next()).getStock(sc.next())
-                .increase(new DateImpl(sc.next()), new DateImpl(sc.next()));
-        if (inc) {
-          writeMessage("Increased.");
-        } else {
-          writeMessage("Did not increase.");
-        }
+        new AnalyzeGainOrLoss(sc, user, this.view).execute();
         break;
       case "analyze-x-day-crossover":
-        List<Date> crosses = user.getPortfolio(sc.next()).getStock(sc.next()).xDayCrossovers(new DateImpl(sc.next()), new DateImpl(sc.next()), Integer.parseInt(sc.next()));
-        for (int i  = 0; i <= crosses.size(); i++) {
-          writeMessage(crosses.get(i).toString());
-        }
+        new AnalyzeXDayCrossover(sc, user, this.view).execute();
         break;
       case "get-value":
-        double value = user.getPortfolio(sc.next()).getValue(new DateImpl(sc.next()));
-        writeMessage("The value is: " + value);
+        new GetValue(sc, user, this.view).execute();
         break;
       case "menu":
         welcomeMessage();

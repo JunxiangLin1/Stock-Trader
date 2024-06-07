@@ -9,7 +9,7 @@ import controllers.StockGameController;
 
 import models.User;
 import models.impl.UserImpl;
-import view.StockGameView;
+import views.StockGameView;
 
 public class Main {
   public static void main(String[] args) throws IOException {

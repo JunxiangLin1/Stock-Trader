@@ -1,9 +1,9 @@
-package controllers;
+package controllers.commands;
 
 import java.util.Scanner;
 
 import models.User;
-import view.StockGameView;
+import views.StockGameView;
 
 public abstract class AbstractGameCommand implements GameCommand {
   private Scanner sc;

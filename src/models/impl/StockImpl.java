@@ -7,14 +7,18 @@ import java.util.Map;
 
 import models.Date;
 import models.Stock;
+import models.macros.PopulateDataMacro;
 
 public class StockImpl implements Stock {
   String ticker;
   Map<Date, List<Double>> data;
+  int shares;
 
-  public StockImpl(String ticker) {
+  public StockImpl(String ticker, int shares) {
     this.ticker = ticker;
     this.data = new HashMap<Date, List<Double>>();
+    this.shares = shares;
+    new PopulateDataMacro().execute(this);
   }
 
   @Override
@@ -26,6 +30,11 @@ public class StockImpl implements Stock {
   @Override
   public HashMap<Date, List<Double>> getData() {
     return new HashMap<>(this.data);
+  }
+
+  @Override
+  public int getShares() {
+    return this.shares;
   }
 
   @Override
@@ -57,6 +66,4 @@ public class StockImpl implements Stock {
   public double getVolume(Date day) {
     return this.data.get(day).get(3);
   }
-
-
 }
