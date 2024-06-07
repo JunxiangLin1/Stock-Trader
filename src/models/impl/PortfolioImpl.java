@@ -32,7 +32,7 @@ public class PortfolioImpl implements Portfolio {
   public double getValue(Date date) {
     double value = 0.0;
     for (Stock stock : stocks.values()) {
-      value += stock.getClose(date);
+      value += (stock.getClose(date)*stock.getShares());
     }
     return value;
   }
