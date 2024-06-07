@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import models.Date;
-import models.Portfolio;
-import models.Stock;
 import models.User;
 import models.impl.DateImpl;
 import models.impl.StockImpl;
@@ -71,7 +69,7 @@ public class StockGameController {
         welcomeMessage();
         printMenu();
       default:
-        writeMessage("Invalid command. Try again.");
+        writeMessage("Invalid command: " + userInstruction);
     }
   }
 

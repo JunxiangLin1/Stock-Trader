@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 import models.Date;
-import models.InputDataType;
 import models.Stock;
 
 public class StockImpl implements Stock {
@@ -115,7 +114,6 @@ public class StockImpl implements Stock {
         char character = (char)b;
         output.append(character);
       }
-      System.out.println(output);
       // Write to CSV
       try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
         writer.write(output.toString());
@@ -130,11 +128,10 @@ public class StockImpl implements Stock {
   private void readStockInfoCSV() {
     List<List<String>> records = new ArrayList<>();
     try(Scanner scanner = new Scanner(new File("test.csv"))) {
-      System.out.println("FirstLine: " + scanner.nextLine());
+      // Skip first line of labels
+      scanner.nextLine();
       while (scanner.hasNextLine()) {
-        String line = scanner.nextLine();
-        System.out.println("NextLine: " + line);
-        this.readStockInfoRow(line);
+        this.readStockInfoRow(scanner.nextLine());
       }
     } catch (FileNotFoundException e) {
       throw new InternalError("Read and write files are mismatched.");
