@@ -34,9 +34,9 @@ public class PortfolioTest {
     stock1 = new StockImpl("META", 10);
     stock2 = new StockImpl("MSFT", 10);
     emptyStock = new StockImpl("EMPTY", 10);
-    stock1.addData(testDate1, 2, 3);
-    stock1.addData(testDate2, 3, 3);
-    stock1.addData(testDate3, 3, 4);
+    stock1.addData(testDate1, 2, 0, 0, 3, 0);
+    stock1.addData(testDate2, 3, 0,0,3,0);
+    stock1.addData(testDate3, 3, 0,0,4,0);
     stock1.addData(testDate4, 4, 0);
     stock1.addData(testDate5, 0, 104);
     stock2.addData(testDate1, 6, 5);

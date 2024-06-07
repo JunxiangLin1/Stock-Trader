@@ -7,8 +7,6 @@ import java.io.PrintStream;
  * to the user in a text-based interface for the stock game application.
  */
 public class StockGameView {
-
-
   private final PrintStream out;
 
   /**
