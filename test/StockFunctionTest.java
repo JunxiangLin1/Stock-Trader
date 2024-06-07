@@ -43,7 +43,6 @@ public class StockFunctionTest {
     stock.addData(new DateImpl("2023-01-05"), 106.0, 116.0, 96.0, 106.0, 1000.0);
   }
 
-  // Tests for Increase
 
   @Test
   public void testIncreaseTrue() {
@@ -65,7 +64,6 @@ public class StockFunctionTest {
     increase.apply(stock);
   }
 
-  // Tests for XDayCrossovers
 
   @Test
   public void testXDayCrossoversReturnsCorrectDates() {
@@ -87,7 +85,6 @@ public class StockFunctionTest {
 
   @Test
   public void testXDayCrossoversReturnsEmptyListWhenNoCrossovers() {
-    // Change stock data so no crossovers happen
     stock.addData(new DateImpl("2023-01-03"), 100.0, 110.0, 90.0, 100.0, 1000.0);
     stock.addData(new DateImpl("2023-01-04"), 100.0, 110.0, 90.0, 100.0, 1000.0);
     stock.addData(new DateImpl("2023-01-05"), 100.0, 110.0, 90.0, 100.0, 1000.0);
