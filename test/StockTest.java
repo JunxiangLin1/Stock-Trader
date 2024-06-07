@@ -81,6 +81,7 @@ public class StockTest {
   @Test
   public void testReadInputFromAPI() {
     stock1.populateStockData();
-    assertEquals(4, stock1.getClose(new DateImpl("2024-06-05")), 0.01);
+    assertEquals(495.06, stock1.getClose(new DateImpl("2024-06-05")), 0.01);
+    assertEquals(484.45, stock1.getOpen(new DateImpl("2024-06-05")), 0.01);
   }
 }
