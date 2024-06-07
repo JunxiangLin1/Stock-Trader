@@ -1,7 +1,5 @@
 package models.stockFunctions;
 
-import java.util.function.Function;
-
 import models.Date;
 import models.Stock;
 
