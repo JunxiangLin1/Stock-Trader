@@ -7,6 +7,7 @@ import java.util.Scanner;
 import controllers.commands.AddStockToPortfolio;
 import controllers.commands.AnalyzeGainOrLoss;
 import controllers.commands.AnalyzeXDayCrossover;
+import controllers.commands.AnalyzeXDayMovingAverage;
 import controllers.commands.CreatePortfolio;
 import controllers.commands.GetValue;
 import models.User;
@@ -78,6 +79,9 @@ public class StockGameController {
         break;
       case "analyze-gain-or-loss":
         new AnalyzeGainOrLoss(sc, user, this.view).execute();
+        break;
+      case "analyze-x-day-moving-average":
+        new AnalyzeXDayMovingAverage(sc, user, this.view).execute();
         break;
       case "analyze-x-day-crossover":
         new AnalyzeXDayCrossover(sc, user, this.view).execute();
