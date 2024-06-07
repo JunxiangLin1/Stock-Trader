@@ -14,6 +14,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+
+/**
+ * The {@code StockTest} class contains unit tests for the {@link StockImpl} class.
+ */
 public class StockTest {
   DateImpl testDate1;
   DateImpl testDate2;

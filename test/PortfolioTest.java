@@ -10,6 +10,9 @@ import models.impl.StockImpl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
+/**
+ * The {@code PortfolioTest} class contains unit tests for all the methods of {@link PortfolioImpl} class.
+ */
 public class PortfolioTest {
   DateImpl testDate1;
   DateImpl testDate2;

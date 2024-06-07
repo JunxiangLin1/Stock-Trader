@@ -4,6 +4,10 @@ import java.util.List;
 
 import models.Date;
 
+/**
+ * Implementation of the {@link Date} interface. This class represents a date with day,
+ * month, and year components, and provides methods for date manipulation and validation.
+ */
 public class DateImpl implements Date {
 
   private int day;
@@ -12,7 +16,9 @@ public class DateImpl implements Date {
   private final String date;
 
   /**
-   * Construct a {@code models.impl.DateImpl} object.
+   * Constructs a {@code models.impl.DateImpl} object.
+   * Parses the string input to create the month, day, and year.
+   * Checks to see if the date is valid.
    *
    * @param date the date in question as a formatted string
    * @throws IllegalArgumentException if the models.Date is not valid
@@ -84,11 +90,7 @@ public class DateImpl implements Date {
     }
   }
 
-  /**
-   * Advances the MyDate by the given days and stops if advances before 1 Jan 0000.
-   *
-   * @param days the amount of days the models.Date will shift by
-   */
+  @Override
   public void advance(int days) {
     this.shiftDay(days);
     if (this.year < 0) {

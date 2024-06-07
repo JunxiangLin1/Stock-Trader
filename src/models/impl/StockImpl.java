@@ -9,11 +9,24 @@ import models.Date;
 import models.Stock;
 import models.macros.PopulateDataMacro;
 
+/**
+ * Implementation of the {@link Stock} interface. This class represents a stock with
+ * its ticker symbol, number of shares, and daily price data.
+ */
 public class StockImpl implements Stock {
+
   String ticker;
+
   Map<Date, List<Double>> data;
+
   int shares;
 
+  /**
+   * Constructs a {@code StockImpl} object with the specified ticker and number of shares.
+   *
+   * @param ticker the ticker symbol of the stock
+   * @param shares the number of shares
+   */
   public StockImpl(String ticker, int shares) {
     this.ticker = ticker;
     this.data = new HashMap<Date, List<Double>>();

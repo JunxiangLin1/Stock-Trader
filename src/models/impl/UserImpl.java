@@ -7,9 +7,17 @@ import models.Portfolio;
 import models.Stock;
 import models.User;
 
+/**
+ * Implementation of the {@link User} interface. This class represents a user
+ * in the stock game application who can manage multiple portfolios and add stocks to them.
+ */
 public class UserImpl implements User {
+
   private Map<String, Portfolio> portfolios;
 
+  /**
+   * Constructs a {@code UserImpl} object with an empty portfolio map.
+   */
   public UserImpl() {
     this.portfolios = new HashMap<>();
   }

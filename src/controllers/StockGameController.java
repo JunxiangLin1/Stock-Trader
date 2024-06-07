@@ -12,12 +12,25 @@ import controllers.commands.GetValue;
 import models.User;
 import views.StockGameView;
 
-
+/**
+ * The {@code StockGameController} class handles user input and commands for the stock game application.
+ */
 public class StockGameController {
+
   private final Readable readable;
+
   private final User user;
+
   private final StockGameView view;
 
+  /**
+   * Constructs a {@code StockGameController} object.
+   *
+   * @param readable the source of user input
+   * @param user the user interacting with the application
+   * @param view the view for displaying messages to the user
+   * @throws IllegalArgumentException if any of the parameters are null
+   */
   public StockGameController(Readable readable, User user, StockGameView view) {
     if ((user == null) || (readable == null) || (view == null)) {
       throw new IllegalArgumentException("User, readable or appendable is null");
@@ -27,6 +40,11 @@ public class StockGameController {
     this.view = view;
   }
 
+  /**
+   * Starts the control loop, processing user commands until the user exits.
+   *
+   * @throws IOException if an I/O error occurs
+   */
   public void control() throws IOException {
     Scanner scanner = new Scanner(readable);
     welcomeMessage();
@@ -42,6 +60,14 @@ public class StockGameController {
     scanner.close();
   }
 
+  /**
+   * Processes user commands and executes corresponding actions.
+   *
+   * @param sc the scanner for reading user input
+   * @param user the user interacting with the application
+   * @param userInstruction the user command to process
+   * @throws IOException if an I/O error occurs
+   */
   protected void processCommands(Scanner sc, User user, String userInstruction) throws IOException {
     switch (userInstruction.toLowerCase()) {
       case "create-portfolio":
@@ -67,10 +93,21 @@ public class StockGameController {
     }
   }
 
+  /**
+   * Writes a message to the view.
+   *
+   * @param message the message to display
+   * @throws IllegalStateException if an I/O error occurs
+   */
   protected void writeMessage(String message) throws IllegalStateException {
     view.displayMessage(message + System.lineSeparator());
   }
 
+  /**
+   * Prints the menu of supported user instructions.
+   *
+   * @throws IllegalStateException if an I/O error occurs
+   */
   protected void printMenu() throws IllegalStateException {
     writeMessage("Supported user instructions are: ");
     writeMessage("create-portfolio portfolio-name " +
@@ -90,11 +127,21 @@ public class StockGameController {
     writeMessage("exit (quit the program) ");
   }
 
+  /**
+   * Displays a welcome message and the menu of supported instructions.
+   *
+   * @throws IllegalStateException if an I/O error occurs
+   */
   protected void welcomeMessage() throws IllegalStateException {
     writeMessage("Welcome to the Stock Game!");
     printMenu();
   }
 
+  /**
+   * Displays a farewell message when the user exits the program.
+   *
+   * @throws IllegalStateException if an I/O error occurs
+   */
   protected void farewellMessage() throws IllegalStateException {
     writeMessage("Thank you for using this program!");
   }

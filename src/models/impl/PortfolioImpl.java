@@ -7,9 +7,18 @@ import models.Date;
 import models.Portfolio;
 import models.Stock;
 
+/**
+ * Implementation of the {@link Portfolio} interface. This class represents
+ * a portfolio of stocks, providing methods to add stocks, retrieve stocks by
+ * their ticker symbols, and calculate the total value of the portfolio on a given date.
+ */
 public class PortfolioImpl implements Portfolio {
+
   private Map<String, Stock> stocks;
 
+  /**
+   * Constructs a {@code PortfolioImpl} object with an empty collection of stocks.
+   */
   public PortfolioImpl() {
     this.stocks = new HashMap<>();
   }

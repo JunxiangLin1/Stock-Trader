@@ -7,6 +7,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * The {@code DateTest} class contains unit tests for all the methods of the {@link DateImpl} class.
+ */
 public class DateTest {
 
   DateImpl testDate1;

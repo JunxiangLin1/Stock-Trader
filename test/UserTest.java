@@ -11,6 +11,10 @@ import models.impl.UserImpl;
 
 import static org.junit.Assert.assertEquals;
 
+
+/**
+ * The {@code UserTest} class contains unit tests for the {@link UserImpl} class.
+ */
 public class UserTest {
   DateImpl testDate1;
   DateImpl testDate2;
