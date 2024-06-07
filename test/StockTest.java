@@ -36,15 +36,17 @@ public class StockTest {
     testDate5 = new DateImpl("2014-12-14");
     stock1 = new StockImpl("META", 10);
     stock2 = new StockImpl("MSFT", 10);
-    stock1.addData(testDate1, 2, 3);
-    stock1.addData(testDate2, 3, 3);
-    stock1.addData(testDate3, 3, 4);
-    stock1.addData(testDate4, 4, 0);
-    stock1.addData(testDate5, 0, 104);
+    stock1.addData(testDate1, 2, 3, 2, 2, 56);
+    stock1.addData(testDate2, 3, 3, 3, 3, 56);
+    stock1.addData(testDate3, 3, 4, 3, 3, 56);
+    stock1.addData(testDate4, 4, 5, 0, 3, 56);
+    stock1.addData(testDate5, 0, 104, 0, 56, 56);
   }
 
   @Test
   public void testIncrease() {
+
+
     assertTrue(stock1.increase(testDate1, testDate5));
     assertFalse(stock1.increase(testDate1, testDate4));
     Exception exception = assertThrows(IllegalArgumentException.class,
