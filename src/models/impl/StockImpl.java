@@ -19,15 +19,22 @@ import models.Stock;
 public class StockImpl implements Stock {
   String ticker;
   Map<Date, List<Double>> days;
+  int shares;
 
-  public StockImpl(String ticker) {
+  public StockImpl(String ticker, int shares) {
     this.ticker = ticker;
     this.days = new HashMap<Date, List<Double>>();
+    this.shares = shares;
   }
 
   @Override
   public void addDate(Date date, double open, double close) {
     this.days.put(date, new ArrayList<Double>(List.of(open, close)));
+  }
+
+  @Override
+  public int getShares() {
+    return this.shares;
   }
 
   @Override

@@ -31,9 +31,9 @@ public class UserTest {
     testDate3 = new DateImpl("11/15/2014");
     testDate4 = new DateImpl("12/13/2014");
     testDate5 = new DateImpl("12/14/2014");
-    stock1 = new StockImpl("META");
-    stock2 = new StockImpl("MSFT");
-    emptyStock = new StockImpl("EMPTY");
+    stock1 = new StockImpl("META", 10);
+    stock2 = new StockImpl("MSFT", 10);
+    emptyStock = new StockImpl("EMPTY", 10);
     stock1.addDate(testDate1, 2, 3);
     stock1.addDate(testDate2, 3, 3);
     stock1.addDate(testDate3, 3, 4);

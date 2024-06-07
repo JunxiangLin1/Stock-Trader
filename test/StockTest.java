@@ -30,8 +30,8 @@ public class StockTest {
     testDate3 = new DateImpl("2014-11-14");
     testDate4 = new DateImpl("2014-12-13");
     testDate5 = new DateImpl("2014-12-14");
-    stock1 = new StockImpl("META");
-    stock2 = new StockImpl("MSFT");
+    stock1 = new StockImpl("META", 10);
+    stock2 = new StockImpl("MSFT", 10);
     stock1.addDate(testDate1, 2, 3);
     stock1.addDate(testDate2, 3, 3);
     stock1.addDate(testDate3, 3, 4);

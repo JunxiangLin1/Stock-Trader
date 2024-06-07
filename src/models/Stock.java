@@ -19,5 +19,7 @@ public interface Stock {
 
   double getOpen(Date day);
 
-  public void populateStockData();
+  void populateStockData();
+
+  int getShares();
 }
