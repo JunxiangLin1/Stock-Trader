@@ -1,4 +1,4 @@
-package models.macros;
+package models.stockFunctions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,15 +10,26 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Function;
 
 import models.Stock;
 import models.impl.DateImpl;
 
-public class PopulateData implements StockMacro<Void> {
+/**
+ * A Function that populates the data for a given stock using data from the Alpha Vantage API.
+ *
+ */
+public class PopulateData implements StockFunction<Stock, Void> {
   static final String apiKey = "BYAZRVQYKZU9H4X6";
 
+  /**
+   * Populates the data for a given stock using data from the Alpha Vantage API
+   *
+   * @param stock the function argument
+   * @return null
+   */
   @Override
-  public Void execute(Stock stock) {
+  public Void apply(Stock stock) {
     this.makeStockInfoCSV(stock, this.getAPIInputStream(stock));
     this.readStockInfoCSV(stock);
     return null;

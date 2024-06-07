@@ -6,7 +6,7 @@ import java.util.Scanner;
 import models.Date;
 import models.User;
 import models.impl.DateImpl;
-import models.macros.XDayCrossovers;
+import models.stockFunctions.XDayCrossovers;
 import views.StockGameView;
 
 /**
@@ -51,7 +51,7 @@ public class AnalyzeXDayCrossover extends AbstractGameCommand {
     int numDays = sc.nextInt();
 
     List<Date> crosses = new XDayCrossovers(new DateImpl(startDate), new DateImpl(endDate),
-            numDays).execute(this.getUser().getPortfolio(portfolioName).getStock(stockTicker));
+            numDays).apply(this.getUser().getPortfolio(portfolioName).getStock(stockTicker));
     for (int i = 0; i <= crosses.size(); i++) {
       writeMessage(crosses.get(i).toString());
     }

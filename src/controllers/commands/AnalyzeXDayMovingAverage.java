@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import models.User;
 import models.impl.DateImpl;
-import models.macros.XDayMovingAverage;
+import models.stockFunctions.XDayMovingAverage;
 import views.StockGameView;
 
 /**
@@ -45,7 +45,7 @@ public class AnalyzeXDayMovingAverage extends AbstractGameCommand{
     int numDays = sc.nextInt();
 
     double average = new XDayMovingAverage(new DateImpl(date), numDays)
-            .execute(this.getUser().getPortfolio(portfolioName).getStock(stockTicker));
+            .apply(this.getUser().getPortfolio(portfolioName).getStock(stockTicker));
 
     writeMessage(String.format("%d Day Moving Average of %s: %.2f", numDays, stockTicker, average));
   }

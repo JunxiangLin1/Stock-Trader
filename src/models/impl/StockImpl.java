@@ -7,7 +7,7 @@ import java.util.Map;
 
 import models.Date;
 import models.Stock;
-import models.macros.PopulateData;
+import models.stockFunctions.PopulateData;
 
 /**
  * Implementation of the {@link Stock} interface. This class represents a stock with
@@ -31,7 +31,7 @@ public class StockImpl implements Stock {
     this.ticker = ticker;
     this.data = new HashMap<Date, List<Double>>();
     this.shares = shares;
-    new PopulateData().execute(this);
+    new PopulateData().apply(this);
   }
 
   @Override

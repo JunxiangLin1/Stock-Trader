@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import models.User;
 import models.impl.DateImpl;
-import models.macros.Increase;
+import models.stockFunctions.Increase;
 import views.StockGameView;
 
 /**
@@ -48,7 +48,7 @@ public class AnalyzeGainOrLoss extends AbstractGameCommand {
     String endDate = sc.next();
 
     boolean inc = new Increase(new DateImpl(startDate), new DateImpl(endDate))
-            .execute(this.getUser().getPortfolio(portfolioName).getStock(stockTicker));
+            .apply(this.getUser().getPortfolio(portfolioName).getStock(stockTicker));
 
     if (inc) {
       writeMessage("Increased.");
