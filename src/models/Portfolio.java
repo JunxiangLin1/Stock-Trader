@@ -2,7 +2,7 @@ package models;
 
 public interface Portfolio {
 
-  Portfolio addStock(Stock stock1);
+  void addStock(Stock stock1);
 
   Stock getStock(String ticker);
 

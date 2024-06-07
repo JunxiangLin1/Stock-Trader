@@ -2,7 +2,6 @@ package models.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import models.Date;
 import models.Portfolio;
@@ -16,9 +15,8 @@ public class PortfolioImpl implements Portfolio {
   }
 
   @Override
-  public Portfolio addStock(Stock stock1) {
+  public void addStock(Stock stock1) {
     this.stocks.put(stock1.getTicker(), stock1);
-    return this;
   }
 
   @Override

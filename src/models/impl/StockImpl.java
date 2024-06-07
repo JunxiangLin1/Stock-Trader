@@ -1,33 +1,31 @@
 package models.impl;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import models.Date;
 import models.Stock;
 
 public class StockImpl implements Stock {
   String ticker;
-  Map<Date, List<Double>> days;
+  Map<Date, List<Double>> data;
 
   public StockImpl(String ticker) {
     this.ticker = ticker;
-    this.days = new HashMap<Date, List<Double>>();
+    this.data = new HashMap<Date, List<Double>>();
   }
 
   @Override
-  public void addDate(Date date, double open, double close) {
-    this.days.put(date, new ArrayList<Double>(List.of(open, close)));
+  public void addData(Date date, double open, double high, double low, double close,
+                      double volume) {
+    this.data.put(date, new ArrayList<Double>(List.of(open, high, low, close, volume)));
+  }
+
+  @Override
+  public HashMap<Date, List<Double>> getData() {
+    return new HashMap<>(this.data);
   }
 
   @Override
@@ -36,139 +34,29 @@ public class StockImpl implements Stock {
   }
 
   @Override
-  public double getClose(Date day) {
-    return this.days.get(day).get(1);
-  }
-
-  @Override
   public double getOpen(Date day) {
-    return this.days.get(day).get(0);
-  }
-
-  private boolean enoughDaysBefore(Date date, int days) {
-    int numDays = 0;
-    for (Date day : this.days.keySet()) {
-      if (day.compareTo(date) <= 0) {
-        numDays++;
-      }
-      if (numDays >= days) {
-        return true;
-      }
-    }
-    return false;
+    return this.data.get(day).get(0);
   }
 
   @Override
-  public boolean increase(Date start, Date end) throws IllegalArgumentException {
-    if (start.compareTo(end) >= 0) {
-      throw new IllegalArgumentException("Start date must come before End date.");
-    }
-    return this.getClose(end) > this.getClose(start);
+  public double getHigh(Date day) {
+    return this.data.get(day).get(1);
   }
 
   @Override
-  public double xDayMovingAverage(Date date, int days) {
-    if (!this.enoughDaysBefore(date, days)) {
-      throw new IllegalArgumentException("Not enough days before " + date.toString());
-    }
-    double average = 0;
-    Date currentDate = new DateImpl(date.toString());
-    for (int i = 0; i < days; i++) {
-      if (this.days.containsKey(currentDate)) {
-        average += this.getClose(currentDate);
-      } else {
-        i -= 1;
-      }
-      currentDate.advance(-1);
-    }
-    return average / days;
+  public double getLow(Date day) {
+    return this.data.get(day).get(2);
   }
 
   @Override
-  public List<Date> xDayCrossovers(Date start, Date end, int day) {
-    if (start.compareTo(end) > 0) {
-      throw new IllegalArgumentException("Start date cannot be greater than end date.");
-    }
-
-    // Make a copy of the current date and initialize returning dates
-    List<Date> dates = new ArrayList<Date>();
-    Date currentDate = new DateImpl(start.toString());
-
-    //While the current date has not reached the end
-    while (currentDate.compareTo(end) <= 0) {
-      // If the current day's close is greater than the moving average, add it to the dates.
-      if (this.days.containsKey(currentDate)
-              && (this.getClose(currentDate) > this.xDayMovingAverage(currentDate, day))){
-        dates.add(new DateImpl(currentDate.toString()));
-      }
-      currentDate.advance(1);
-    }
-    return dates;
+  public double getClose(Date day) {
+    return this.data.get(day).get(3);
   }
 
-  private void makeStockInfoCSV(InputStream in) {
-    StringBuilder output = new StringBuilder();
-    int b;
-    try {
-      while ((b=in.read())!=-1) {
-        char character = (char)b;
-        output.append(character);
-      }
-      // Write to CSV
-      try (PrintWriter writer = new PrintWriter(new File("test.csv"))) {
-        writer.write(output.toString());
-      } catch (FileNotFoundException e) {
-        throw new FileNotFoundException("CSV file not found.");
-      }
-    } catch (IOException e) {
-      throw new IllegalArgumentException("No price data found for " + this.getTicker());
-    }
+  @Override
+  public double getVolume(Date day) {
+    return this.data.get(day).get(3);
   }
 
-  private void readStockInfoCSV() {
-    List<List<String>> records = new ArrayList<>();
-    try(Scanner scanner = new Scanner(new File("test.csv"))) {
-      // Skip first line of labels
-      scanner.nextLine();
-      while (scanner.hasNextLine()) {
-        this.readStockInfoRow(scanner.nextLine());
-      }
-    } catch (FileNotFoundException e) {
-      throw new InternalError("Read and write files are mismatched.");
-    }
-  }
 
-  private void readStockInfoRow(String line) {
-    String[] stockInfo = line.split(",");
-    this.addDate(
-            new DateImpl(stockInfo[0]),
-            Double.parseDouble(stockInfo[1]),
-            Double.parseDouble(stockInfo[4]));
-  }
-
-  private InputStream getAPIInputStream() {
-    String apiKey = "BYAZRVQYKZU9H4X6";
-    URL url;
-    try {
-      url = new URL("https://www.alphavantage"
-              + ".co/query?function=TIME_SERIES_DAILY"
-              + "&outputsize=full"
-              + "&symbol"
-              + "=" + this.getTicker() + "&apikey=" + apiKey + "&datatype=csv");
-    }
-    catch (MalformedURLException e) {
-      throw new RuntimeException("the alphavantage API has either changed or "
-              + "no longer works");
-    }
-    try {
-      return url.openStream();
-    } catch (IOException e) {
-      throw new IllegalArgumentException("No price data found for " + this.getTicker());
-    }
-  }
-
-  public void populateStockData() {
-    this.makeStockInfoCSV(this.getAPIInputStream());
-    this.readStockInfoCSV();
-  }
 }

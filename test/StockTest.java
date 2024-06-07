@@ -32,11 +32,11 @@ public class StockTest {
     testDate5 = new DateImpl("2014-12-14");
     stock1 = new StockImpl("META");
     stock2 = new StockImpl("MSFT");
-    stock1.addDate(testDate1, 2, 3);
-    stock1.addDate(testDate2, 3, 3);
-    stock1.addDate(testDate3, 3, 4);
-    stock1.addDate(testDate4, 4, 0);
-    stock1.addDate(testDate5, 0, 104);
+    stock1.addData(testDate1, 2, 3);
+    stock1.addData(testDate2, 3, 3);
+    stock1.addData(testDate3, 3, 4);
+    stock1.addData(testDate4, 4, 0);
+    stock1.addData(testDate5, 0, 104);
   }
 
   @Test
@@ -65,11 +65,11 @@ public class StockTest {
     List<Date> expectedDates = new ArrayList<Date>(List.of(testDate3, testDate5));
     assertEquals(expectedDates, stock1.xDayCrossovers(testDate2, testDate5, 2));
 
-    stock2.addDate(testDate1, 6, 5);
-    stock2.addDate(testDate2, 5, 4);
-    stock2.addDate(testDate3, 4, 3);
-    stock2.addDate(new DateImpl("2014-11-16"), 3, 4);
-    stock2.addDate(new DateImpl("2014-11-17"), 4, 5);
+    stock2.addData(testDate1, 6, 5);
+    stock2.addData(testDate2, 5, 4);
+    stock2.addData(testDate3, 4, 3);
+    stock2.addData(new DateImpl("2014-11-16"), 3, 4);
+    stock2.addData(new DateImpl("2014-11-17"), 4, 5);
 
     expectedDates = new ArrayList<Date>(List.of(
             new DateImpl("2014-11-16"),

@@ -1,23 +1,24 @@
 package models;
 
-import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 
 public interface Stock {
 
-  boolean increase (Date start, Date end);
+  void addData(Date date, double open, double high, double low, double close,
+               double volume);
 
-  double xDayMovingAverage(Date date, int days);
-
-  List<Date> xDayCrossovers(Date start, Date end, int day);
-
-  void addDate(Date date, double open, double close);
+  HashMap<Date, List<Double>> getData();
 
   String getTicker();
 
-  double getClose(Date day);
-
   double getOpen(Date day);
 
-  public void populateStockData();
+  double getHigh(Date day);
+
+  double getLow(Date day);
+
+  double getVolume(Date day);
+
+  double getClose(Date day);
 }
