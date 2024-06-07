@@ -6,31 +6,30 @@ import java.util.List;
 import java.util.Scanner;
 
 import models.Date;
+import models.Portfolio;
 import models.Stock;
 import models.User;
 import models.impl.DateImpl;
 import models.impl.StockImpl;
-import view.StockGameView;
 
 
 public class StockGameController {
   private Readable readable;
+  private Appendable appendable;
   private User user;
-  private StockGameView view;
 
 
-  public StockGameController(Readable readable, User user, StockGameView view) {
-    if ((user == null) || (readable == null) || (view == null)) {
+  public StockGameController(Readable readable, Appendable appendable, User user) {
+    if ((user == null) || (readable == null) || (appendable == null)) {
       throw new IllegalArgumentException("User, readable or appendable is null");
     }
     this.user = user;
+    this.appendable = appendable;
     this.readable = readable;
-    this.view = view;
   }
 
   public void control() throws IOException {
     Scanner scanner = new Scanner(readable);
-    welcomeMessage();
     while (true) {
       writeMessage("Enter command: ");
       String command = scanner.nextLine();
@@ -50,10 +49,7 @@ public class StockGameController {
         writeMessage("Created Portfolio.");
         break;
       case "add-stock-to-portfolio":
-        String portfolioName = sc.next();
-        Stock stock = new StockImpl(sc.next());
-        stock.populateStockData();
-        user.addStockToPortfolio(portfolioName, stock);
+        user.addStockToPortfolio(sc.next(), new StockImpl(sc.next()));
         writeMessage("Added Stock.");
         break;
       case "analyze-gain-or-loss":
@@ -80,7 +76,12 @@ public class StockGameController {
   }
 
   protected void writeMessage(String message) throws IllegalStateException {
-    view.displayMessage(message + System.lineSeparator());
+    try {
+      appendable.append(message).append(System.lineSeparator());
+
+    } catch (IOException e) {
+      throw new IllegalStateException(e.getMessage());
+    }
   }
 
   protected void printMenu() throws IllegalStateException {
