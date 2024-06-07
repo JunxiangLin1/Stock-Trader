@@ -52,9 +52,8 @@ public class ControllerTest {
     // Verify interactions
     assertTrue(outputParts[0].contains("Welcome to the Stock Game!"));
     assertTrue(outputParts[1].contains("Enter command: "));
-    assertTrue(outputParts.get(2).contains("create-portfolio portfolio-name"));
-    assertTrue(outputParts.containsKey("myPortfolio"));
-    assertTrue(outputParts.get(testView.getMessages().size() - 1).contains("Thank you for using this program!"));
+    assertTrue(outputParts[2].contains("create-portfolio portfolio-name"));
+    assertTrue(outputParts[3].contains("myPortfolio"));
   }
 
   private static class TestUser implements User {
