@@ -18,9 +18,9 @@ public class DateTest {
 
   @Before
   public void setup() {
-    testDate1 = new DateImpl("12/13/2014");
-    testDate2 = new DateImpl("12/13/2014");
-    testDate3 = new DateImpl("11/13/2014");
+    testDate1 = new DateImpl("2014-12-13");
+    testDate2 = new DateImpl("2014-12-13");
+    testDate3 = new DateImpl("2014-11-13");
   }
 
   @Test
