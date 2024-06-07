@@ -3,6 +3,7 @@ package controllers.commands;
 import java.util.Scanner;
 
 import models.User;
+import views.GameView;
 import views.StockGameView;
 
 /**
@@ -19,7 +20,7 @@ public class CreatePortfolio extends AbstractGameCommand {
    * @param user the User model to be used
    * @param view the {@code StockGameView} view to be used
    */
-  public CreatePortfolio(Scanner sc, User user, StockGameView view) {
+  public CreatePortfolio(Scanner sc, User user, GameView view) {
     super(sc, user, view);
   }
 

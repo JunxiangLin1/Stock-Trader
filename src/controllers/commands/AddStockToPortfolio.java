@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import models.User;
 import models.impl.StockImpl;
+import views.GameView;
 import views.StockGameView;
 
 /**
@@ -20,7 +21,7 @@ public class AddStockToPortfolio extends AbstractGameCommand {
    * @param user the User model to be used
    * @param view the {@code StockGameView} view to be used
    */
-  public AddStockToPortfolio(Scanner sc, User user, StockGameView view) {
+  public AddStockToPortfolio(Scanner sc, User user, GameView view) {
     super(sc, user, view);
   }
 

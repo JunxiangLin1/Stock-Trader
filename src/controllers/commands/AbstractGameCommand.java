@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import controllers.StockGameController;
 import models.User;
+import views.GameView;
 import views.StockGameView;
 
 /**
@@ -13,7 +14,7 @@ import views.StockGameView;
 public abstract class AbstractGameCommand implements GameCommand {
   private final Scanner sc;
   private final User user;
-  private final StockGameView view;
+  private final GameView view;
 
   /**
    * Constructor for the {@code AbstractGameCommand}.
@@ -23,7 +24,7 @@ public abstract class AbstractGameCommand implements GameCommand {
    * @param user the user model the Command uses for the execution.
    * @param view the view the Command uses for the execution.
    */
-  public AbstractGameCommand(Scanner sc, User user, StockGameView view) {
+  public AbstractGameCommand(Scanner sc, User user, GameView view) {
     this.sc = sc;
     this.user = user;
     this.view = view;
@@ -64,7 +65,7 @@ public abstract class AbstractGameCommand implements GameCommand {
    *
    * @return the view to be returned
    */
-  protected StockGameView getView() {
+  protected GameView getView() {
     return this.view;
   }
 }

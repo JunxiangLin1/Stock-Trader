@@ -1,6 +1,10 @@
 package views;
 
-public class MockStockGameView {
+/**
+ * Implements {@link GameView}.
+ * Represents a View that adds the desired outputs to a StringBuilder.
+ */
+public class MockStockGameView implements GameView {
   private final StringBuilder out;
 
   /**

@@ -7,6 +7,8 @@ import models.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import models.impl.UserImpl;
+import views.MockStockGameView;
 import views.StockGameView;
 
 import java.io.IOException;
@@ -15,19 +17,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertTrue;
 
 public class ControllerTest {
 
-  private TestUser testUser;
-  private TestView testView;
+  private Scanner scanner;
+  private UserImpl testUser;
+  private MockStockGameView testView;
   private StockGameController controller;
+  StringBuilder output;
 
   @Before
   public void setUp() {
-    testUser = new TestUser();
-    testView = new TestView();
+    output = new StringBuilder();
+    testUser = new UserImpl();
+    testView = new MockStockGameView(output);
   }
 
   @Test
@@ -42,12 +48,13 @@ public class ControllerTest {
     // Run the control method
     controller.control();
 
+    String[] outputParts = output.toString().split("\n");
     // Verify interactions
-    assertTrue(testView.getMessages().get(0).contains("Welcome to the Stock Game!"));
-    assertTrue(testView.getMessages().get(1).contains("Enter command: "));
-    assertTrue(testView.getMessages().get(2).contains("create-portfolio portfolio-name"));
-    assertTrue(testUser.getPortfolios().containsKey("myPortfolio"));
-    assertTrue(testView.getMessages().get(testView.getMessages().size() - 1).contains("Thank you for using this program!"));
+    assertTrue(outputParts[0].contains("Welcome to the Stock Game!"));
+    assertTrue(outputParts[1].contains("Enter command: "));
+    assertTrue(outputParts.get(2).contains("create-portfolio portfolio-name"));
+    assertTrue(outputParts.containsKey("myPortfolio"));
+    assertTrue(outputParts.get(testView.getMessages().size() - 1).contains("Thank you for using this program!"));
   }
 
   private static class TestUser implements User {

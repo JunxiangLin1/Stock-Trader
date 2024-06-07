@@ -6,7 +6,7 @@ import java.io.PrintStream;
  * The {@code StockGameView} class provides methods to display messages
  * to the user in a text-based interface for the stock game application.
  */
-public class StockGameView {
+public class StockGameView implements GameView {
   private final PrintStream out;
 
   /**

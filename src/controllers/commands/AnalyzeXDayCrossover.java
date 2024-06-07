@@ -7,6 +7,7 @@ import models.Date;
 import models.User;
 import models.impl.DateImpl;
 import models.stockFunctions.XDayCrossovers;
+import views.GameView;
 import views.StockGameView;
 
 /**
@@ -24,7 +25,7 @@ public class AnalyzeXDayCrossover extends AbstractGameCommand {
    * @param user the User model to be used
    * @param view the {@code StockGameView} view to be used
    */
-  public AnalyzeXDayCrossover(Scanner sc, User user, StockGameView view) {
+  public AnalyzeXDayCrossover(Scanner sc, User user, GameView view) {
     super(sc, user, view);
   }
 

@@ -11,6 +11,7 @@ import controllers.commands.AnalyzeXDayMovingAverage;
 import controllers.commands.CreatePortfolio;
 import controllers.commands.GetValue;
 import models.User;
+import views.GameView;
 import views.StockGameView;
 
 /**
@@ -22,7 +23,7 @@ public class StockGameController {
 
   private final User user;
 
-  private final StockGameView view;
+  private final GameView view;
 
   /**
    * Constructs a {@code StockGameController} object.
@@ -32,7 +33,7 @@ public class StockGameController {
    * @param view the view for displaying messages to the user
    * @throws IllegalArgumentException if any of the parameters are null
    */
-  public StockGameController(Readable readable, User user, StockGameView view) {
+  public StockGameController(Readable readable, User user, GameView view) {
     if ((user == null) || (readable == null) || (view == null)) {
       throw new IllegalArgumentException("User, readable or appendable is null");
     }
