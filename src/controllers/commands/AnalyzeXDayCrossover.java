@@ -53,8 +53,8 @@ public class AnalyzeXDayCrossover extends AbstractGameCommand {
 
     List<Date> crosses = new XDayCrossovers(new DateImpl(startDate), new DateImpl(endDate),
             numDays).apply(this.getUser().getPortfolio(portfolioName).getStock(stockTicker));
-    for (int i = 0; i <= crosses.size(); i++) {
-      writeMessage(crosses.get(i).toString());
+    for (Date cross : crosses) {
+      writeMessage(cross.toString());
     }
   }
 }

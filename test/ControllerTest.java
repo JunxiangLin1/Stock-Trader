@@ -19,8 +19,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * The tests for the {@code StockGameController} class.
+ */
 public class ControllerTest {
 
   private Scanner scanner;
@@ -37,9 +41,19 @@ public class ControllerTest {
   }
 
   @Test
-  public void testControlCreatePortfolio() throws IOException {
+  public void testControlCommands() throws IOException {
     // Simulate user input
-    String input = "create-portfolio myPortfolio\nexit\n";
+    String input = "create-portfolio myPortfolio "
+            + "add-stock-to-portfolio myPortfolio META 3 "
+            + "analyze-gain-or-loss myPortfolio META 2013-05-17 2013-06-19 "
+            + "analyze-x-day-moving-average myPortfolio META 2013-05-17 3 "
+            + "analyze-x-day-crossover myPortfolio META 2013-05-17 2013-06-19 3 "
+            + "get-value myPortfolio 2013-05-17 "
+            + "add-stock-to-portfolio myPortfolio MSFT 1 "
+            + "get-value myPortfolio 2013-05-17 "
+            + "add-stock-to-portfolio myPortfolio META 0 "
+            + "get-value myPortfolio 2013-05-17 "
+            + "\nexit\n";
     Readable readable = new StringReader(input);
 
     // Initialize controller with test objects
@@ -49,69 +63,18 @@ public class ControllerTest {
     controller.control();
 
     String[] outputParts = output.toString().split("\n");
+    System.out.println(output);
+    System.out.println(outputParts[1]);
     // Verify interactions
     assertTrue(outputParts[0].contains("Welcome to the Stock Game!"));
-    assertTrue(outputParts[1].contains("Enter command: "));
-    assertTrue(outputParts[2].contains("create-portfolio portfolio-name"));
-    assertTrue(outputParts[3].contains("myPortfolio"));
-  }
-
-  private static class TestUser implements User {
-    private final Map<String, Portfolio> portfolios = new HashMap<>();
-
-    @Override
-    public void createPortfolio(String portfolioName) {
-      portfolios.put(portfolioName, new TestPortfolio());
-    }
-
-    @Override
-    public Portfolio getPortfolio(String portfolioName) {
-      return portfolios.get(portfolioName);
-    }
-
-    @Override
-    public void addStockToPortfolio(String portfolioName, Stock stock) {
-      getPortfolio(portfolioName).addStock(stock);
-    }
-
-    public Map<String, Portfolio> getPortfolios() {
-      return portfolios;
-    }
-  }
-
-  private static class TestView extends StockGameView {
-    private final List<String> messages = new ArrayList<>();
-
-    public TestView() {
-      super(System.out);
-    }
-
-    @Override
-    public void displayMessage(String message) {
-      messages.add(message);
-    }
-
-    public List<String> getMessages() {
-      return messages;
-    }
-  }
-
-  private static class TestPortfolio implements Portfolio {
-    private final Map<String, Stock> stocks = new HashMap<>();
-
-    @Override
-    public void addStock(Stock stock) {
-      stocks.put(stock.getTicker(), stock);
-    }
-
-    @Override
-    public Stock getStock(String ticker) {
-      return stocks.get(ticker);
-    }
-
-    @Override
-    public double getValue(Date date) {
-      return 0;
-    }
+    assertEquals(outputParts[1], "Supported user instructions are: "
+            + System.lineSeparator());
+    assertEquals(outputParts[2], "create-portfolio portfolio-name " +
+            "(create a portfolio of the given name)" + System.lineSeparator());
+    assertEquals(outputParts[3], "myPortfolio");
+    assertEquals(outputParts[4], "myPortfolio");
+    assertEquals(outputParts[5], "myPortfolio");
+    assertEquals(outputParts[6], "myPortfolio");
+    assertEquals(outputParts[7], "myPortfolio");
   }
 }
