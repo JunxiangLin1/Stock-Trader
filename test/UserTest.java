@@ -3,71 +3,51 @@ import org.junit.Test;
 
 import models.Portfolio;
 import models.Stock;
-import models.User;
-import models.impl.DateImpl;
 import models.impl.PortfolioImpl;
-import models.impl.StockImpl;
+import models.impl.SimpleStock;
 import models.impl.UserImpl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 
 /**
  * The {@code UserTest} class contains unit tests for the {@link UserImpl} class.
  */
 public class UserTest {
-//  DateImpl testDate1;
-//  DateImpl testDate2;
-//  DateImpl testDate3;
-//  DateImpl testDate4;
-//  DateImpl testDate5;
-//  Stock stock1;
-//  Stock stock2;
-//  Stock emptyStock;
-//  Portfolio portfolio1;
-//  Portfolio emptyPortfolio;
-//  User user1;
-//
-//  @Before
-//  public void setup() {
-//    testDate1 = new DateImpl("11/13/2014");
-//    testDate2 = new DateImpl("11/14/2014");
-//    testDate3 = new DateImpl("11/15/2014");
-//    testDate4 = new DateImpl("12/13/2014");
-//    testDate5 = new DateImpl("12/14/2014");
-//    stock1 = new StockImpl("META", 10);
-//    stock2 = new StockImpl("MSFT", 10);
-//    emptyStock = new StockImpl("EMPTY", 10);
-//    stock1.addData(testDate1, 2, 3);
-//    stock1.addData(testDate2, 3, 3);
-//    stock1.addData(testDate3, 3, 4);
-//    stock1.addData(testDate4, 4, 0);
-//    stock1.addData(testDate5, 0, 104);
-//    stock2.addData(testDate1, 6, 5);
-//    stock2.addData(testDate2, 5, 4);
-//    stock2.addData(testDate3, 4, 3);
-//    stock2.addData(new DateImpl("11/16/2014"), 3, 4);
-//    stock2.addData(new DateImpl("11/17/2014"), 4, 5);
-//    portfolio1 = new PortfolioImpl();
-//    emptyPortfolio = new PortfolioImpl();
-//    portfolio1.addStock(stock1);
-//    portfolio1.addStock(stock2);
-//    user1 = new UserImpl();
-//    user1.createPortfolio("PortoOne");
-//    user1.createPortfolio("PortoTwo");
-//
-//  }
-//
-//  @Test
-//  public void createPortfolioPutCorrectEmptyPortfolioIntoUser() {
-//    assertEquals(emptyPortfolio, user1.getPortfolio("PortoOne"));
-//    assertEquals(emptyPortfolio, user1.getPortfolio("PortoTwo"));
-//  }
-//
-//  @Test
-//  public void createPortfolioPutCorrectNonEmptyPortfolioIntoUser() {
-//    user1.addStockToPortfolio("PortoOne", stock1);
-//    user1.addStockToPortfolio("PortoOne", stock2);
-//    assertEquals(portfolio1, user1.getPortfolio("PortoOne"));
-//  }
+  private UserImpl user;
+
+  @Before
+  public void setUp() {
+    user = new UserImpl();
+  }
+
+  @Test
+  public void testCreatePortfolio() {
+    user.createPortfolio("Portfolio1");
+    Portfolio portfolio = user.getPortfolio("Portfolio1");
+    assertEquals(new PortfolioImpl(), portfolio);
+  }
+
+  @Test
+  public void testGetPortfolio() {
+    user.createPortfolio("Portfolio1");
+    Portfolio portfolio = user.getPortfolio("Portfolio1");
+    assertEquals(new PortfolioImpl(), portfolio);
+  }
+
+  @Test
+  public void testGetPortfolioForNonExistentPortfolio() {
+    Portfolio portfolio = user.getPortfolio("NonExistentPortfolio");
+    assertNull(portfolio);
+  }
+
+  @Test
+  public void testAddStockToPortfolio() {
+    user.createPortfolio("Portfolio1");
+    Portfolio portfolio = user.getPortfolio("Portfolio1");
+    Stock stock = new SimpleStock("AAPL", 10);
+    user.addStockToPortfolio("Portfolio1", stock);
+    assertEquals(stock, portfolio.getStock("AAPL"));
+  }
 }
