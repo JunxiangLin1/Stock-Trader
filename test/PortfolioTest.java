@@ -44,6 +44,15 @@ public class PortfolioTest {
     portfolio.getStock("AMZN");
   }
 
+  @Test(expected = NullPointerException.class)
+  public void testGetValueThrowsExceptionForNonExistentDate() {
+    stock1.addData(new DateImpl("2023-01-01"), 100.0, 110.0, 90.0, 100.0, 1000.0);
+    stock2.addData(new DateImpl("2023-01-01"), 200.0, 220.0, 180.0, 200.0, 2000.0);
+    portfolio.addStock(stock1);
+    portfolio.addStock(stock2);
+    assertEquals(2000.0, portfolio.getValue(new DateImpl("2023-01-02")), 0.01);
+  }
+
   @Test
   public void testGetValue() {
     stock1.addData(new DateImpl("2023-01-01"), 100.0, 110.0, 90.0, 100.0, 1000.0);
