@@ -5,7 +5,6 @@ import java.util.Scanner;
 import models.User;
 import models.impl.DateImpl;
 import views.GameView;
-import views.StockGameView;
 
 /**
  * A command for the controller to calculate the value of the desired portfolio at a given date.

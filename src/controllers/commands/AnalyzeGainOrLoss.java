@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 import models.User;
 import models.impl.DateImpl;
-import models.stockFunctions.Increase;
+import models.stockfunctions.Increase;
 import views.GameView;
-import views.StockGameView;
+
 
 /**
  * A command for the controller to analyze whether there was a gain or loss over a

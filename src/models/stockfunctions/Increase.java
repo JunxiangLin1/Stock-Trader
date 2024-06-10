@@ -1,4 +1,4 @@
-package models.stockFunctions;
+package models.stockfunctions;
 
 import models.Date;
 import models.Stock;

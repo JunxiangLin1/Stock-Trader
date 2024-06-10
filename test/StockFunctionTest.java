@@ -8,9 +8,9 @@ import models.Stock;
 import models.impl.DateImpl;
 import models.impl.SimpleStock;
 import models.impl.StockImpl;
-import models.stockFunctions.Increase;
-import models.stockFunctions.XDayCrossovers;
-import models.stockFunctions.XDayMovingAverage;
+import models.stockfunctions.Increase;
+import models.stockfunctions.XDayCrossovers;
+import models.stockfunctions.XDayMovingAverage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -52,7 +52,8 @@ public class StockFunctionTest {
 
   @Test
   public void testIncreaseFalse() {
-    stock.addData(new DateImpl("2023-01-05"), 106.0, 116.0, 96.0, 99.0, 1000.0); // Change the end date close to be less
+    stock.addData(new DateImpl("2023-01-05"), 106.0, 116.0, 96.0,
+            99.0, 1000.0);
     Increase increase = new Increase(startDate, endDate);
     assertFalse(increase.apply(stock));
   }

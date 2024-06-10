@@ -1,5 +1,9 @@
 package controllers.commands;
 
+/**
+ * The macro commands for the controller.
+ * Executes when called upon by the controller
+ */
 public interface GameCommand {
 
   /**

@@ -19,7 +19,7 @@ public interface Portfolio {
    *
    * @param ticker the ticker symbol of the stock to be retrieved
    * @return the stock associated with the given ticker symbol
-   * @throws IllegalArgumentException if the stock with the given ticker symbol is not in the portfolio
+   * @throws IllegalArgumentException if the stock with the given ticker is not in the portfolio
    */
   Stock getStock(String ticker);
 

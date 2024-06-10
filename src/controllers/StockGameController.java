@@ -12,10 +12,9 @@ import controllers.commands.CreatePortfolio;
 import controllers.commands.GetValue;
 import models.User;
 import views.GameView;
-import views.StockGameView;
 
 /**
- * The {@code StockGameController} class handles user input and commands for the stock game application.
+ * The {@code StockGameController} class handles user input and commands for the stock application.
  */
 public class StockGameController {
 
@@ -93,6 +92,7 @@ public class StockGameController {
       case "menu":
         welcomeMessage();
         printMenu();
+        break;
       default:
         writeMessage("Invalid command. Try again.");
     }
@@ -115,22 +115,22 @@ public class StockGameController {
    */
   protected void printMenu() throws IllegalStateException {
     writeMessage("Supported user instructions are: ");
-    writeMessage("create-portfolio portfolio-name " +
-            "(create a portfolio of the given name)");
-    writeMessage("add-stock-to-portfolio portfolio-name stock-ticker share amount" +
-            "(adds a stock of the given ticker to the designated portfolio)");
-    writeMessage("analyze-gain-or-loss portfolio-name stock-ticker start-date(YYYY-MM-DD) " +
-            "end-date(YYYY-MM-DD) " +
-            "(analyses whether or not the given stock increased in price within the date range)");
-    writeMessage("analyze-x-day-moving-average portfolio-name stock-ticker date(YYYY-MM-DD) " +
-            "num-days " +
-            "(returns the average closing value of the previous x days) ");
-    writeMessage("analyze-x-day-crossover portfolio-name stock-ticker start-date(YYYY-MM-DD) " +
-            "end-date(YYYY-MM-DD) num-days " +
-            "(returns all the days within the range where the closing price is greater than the " +
-            "x-day moving average)");
-    writeMessage("get-value portfolio-name date(YYYY-MM-DD) " +
-            "(returns the value of the inputted portfolio on that day)");
+    writeMessage("create-portfolio portfolio-name "
+            + "(create a portfolio of the given name)");
+    writeMessage("add-stock-to-portfolio portfolio-name stock-ticker share amount"
+            + "(adds a stock of the given ticker to the designated portfolio)");
+    writeMessage("analyze-gain-or-loss portfolio-name stock-ticker start-date(YYYY-MM-DD) "
+            + "end-date(YYYY-MM-DD) "
+            + "(analyses whether or not the given stock increased in price within the date range)");
+    writeMessage("analyze-x-day-moving-average portfolio-name stock-ticker date(YYYY-MM-DD) "
+            + "num-days "
+            + "(returns the average closing value of the previous x days) ");
+    writeMessage("analyze-x-day-crossover portfolio-name stock-ticker start-date(YYYY-MM-DD) "
+            + "end-date(YYYY-MM-DD) num-days "
+            + "(returns all the days within the range where the closing price is greater than the "
+            + "x-day moving average)");
+    writeMessage("get-value portfolio-name date(YYYY-MM-DD) "
+            + "(returns the value of the inputted portfolio on that day)");
     writeMessage("menu (Print supported instruction list)");
     writeMessage("exit (quit the program) ");
   }

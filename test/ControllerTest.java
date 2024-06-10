@@ -25,7 +25,6 @@ public class ControllerTest {
   private Scanner scanner;
   private UserImpl testUser;
   private MockStockGameView testView;
-  private StockGameController controller;
   StringBuilder output;
 
   @Before
@@ -52,7 +51,7 @@ public class ControllerTest {
     Readable readable = new StringReader(input);
 
     // Initialize controller with test objects
-    controller = new StockGameController(readable, testUser, testView);
+    StockGameController controller = new StockGameController(readable, testUser, testView);
 
     // Run the control method
     controller.control();

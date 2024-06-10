@@ -5,7 +5,6 @@ import java.util.Scanner;
 import controllers.StockGameController;
 import models.User;
 import views.GameView;
-import views.StockGameView;
 
 /**
  * Abstract class for the commands of the {@link StockGameController}.

@@ -1,6 +1,6 @@
 package models.impl;
 
-import models.stockFunctions.PopulateData;
+import models.stockfunctions.PopulateData;
 
 /**
  * Extends the {@link SimpleStock} class.

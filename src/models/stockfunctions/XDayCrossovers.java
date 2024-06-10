@@ -1,4 +1,4 @@
-package models.stockFunctions;
+package models.stockfunctions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ public class XDayCrossovers implements StockFunction<Stock, List<Date>> {
    * @param day the number of days for the x day moving average
    */
   public XDayCrossovers(Date start, Date end, int day) {
-      this.start = start;
-      this.end = end;
-      this.day = day;
+    this.start = start;
+    this.end = end;
+    this.day = day;
   }
 
   /**
@@ -56,7 +56,7 @@ public class XDayCrossovers implements StockFunction<Stock, List<Date>> {
       // If the current day's close is greater than the moving average, add it to the dates.
       Function<Stock, Double> movingAverageMacro = new XDayMovingAverage(currentDate, day);
       if (stock.getData().containsKey(currentDate)
-              && (stock.getClose(currentDate) > movingAverageMacro.apply(stock))){
+              && (stock.getClose(currentDate) > movingAverageMacro.apply(stock))) {
         dates.add(new DateImpl(currentDate.toString()));
       }
       currentDate.advance(1);

@@ -1,7 +1,13 @@
-package models.stockFunctions;
+package models.stockfunctions;
 
 import java.util.function.Function;
 
+/**
+ * An interface representing a function that can be applied to a stock to produce a result.
+ *
+ * @param <Stock> the input stock
+ * @param <R> the type of the result
+ */
 public interface StockFunction<Stock, R> extends Function<Stock, R> {
 
   /**

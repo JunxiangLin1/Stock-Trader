@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 import models.User;
 import models.impl.DateImpl;
-import models.stockFunctions.XDayMovingAverage;
+import models.stockfunctions.XDayMovingAverage;
 import views.GameView;
 
 /**
  * A command for the controller to determine the average of the closing values in the last x days
  * of a specified date.
  */
-public class AnalyzeXDayMovingAverage extends AbstractGameCommand{
+public class AnalyzeXDayMovingAverage extends AbstractGameCommand {
 
   /**
    * Constructor for the {@code AnalyzeXDayMovingAverage}.

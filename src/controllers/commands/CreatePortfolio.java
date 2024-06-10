@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import models.User;
 import views.GameView;
-import views.StockGameView;
 
 /**
  * A command for the controller to create a new portfolio.

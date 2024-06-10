@@ -6,9 +6,8 @@ import java.util.Scanner;
 import models.Date;
 import models.User;
 import models.impl.DateImpl;
-import models.stockFunctions.XDayCrossovers;
+import models.stockfunctions.XDayCrossovers;
 import views.GameView;
-import views.StockGameView;
 
 /**
  * A command for the controller to determine the dates within the date range that has a current

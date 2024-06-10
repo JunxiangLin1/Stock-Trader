@@ -1,4 +1,4 @@
-package models.stockFunctions;
+package models.stockfunctions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,20 +10,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Function;
 
 import models.Stock;
 import models.impl.DateImpl;
 
 /**
  * A Function that populates the data for a given stock using data from the Alpha Vantage API.
- *
  */
 public class PopulateData implements StockFunction<Stock, Void> {
   static final String apiKey = "BYAZRVQYKZU9H4X6";
 
   /**
-   * Populates the data for a given stock using data from the Alpha Vantage API
+   * Populates the data for a given stock using data from the Alpha Vantage API.
    *
    * @param stock the function argument
    * @return null
@@ -59,8 +57,8 @@ public class PopulateData implements StockFunction<Stock, Void> {
     StringBuilder output = new StringBuilder();
     int b;
     try {
-      while ((b=in.read())!=-1) {
-        char character = (char)b;
+      while ((b = in.read()) != -1) {
+        char character = (char) b;
         output.append(character);
       }
       // Write to CSV
@@ -76,7 +74,7 @@ public class PopulateData implements StockFunction<Stock, Void> {
 
   private void readStockInfoCSV(Stock stock) {
     List<List<String>> records = new ArrayList<>();
-    try(Scanner scanner = new Scanner(new File("test.csv"))) {
+    try (Scanner scanner = new Scanner(new File("test.csv"))) {
       // Skip first line of labels
       scanner.nextLine();
       while (scanner.hasNextLine()) {

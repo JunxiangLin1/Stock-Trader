@@ -11,9 +11,10 @@ import models.Date;
 public class DateImpl implements Date {
 
   private int day;
+
   private int month;
+
   private int year;
-  private final String date;
 
   /**
    * Constructs a {@code models.impl.DateImpl} object.
@@ -24,7 +25,6 @@ public class DateImpl implements Date {
    * @throws IllegalArgumentException if the models.Date is not valid
    */
   public DateImpl(String date) {
-    this.date = date;
     String[] parts = date.split("-");
     this.day = Integer.parseInt(parts[2]);
     this.month = Integer.parseInt(parts[1]);

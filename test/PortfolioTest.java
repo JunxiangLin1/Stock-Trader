@@ -11,7 +11,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * The {@code PortfolioTest} class contains unit tests for all the methods of {@link PortfolioImpl} class.
+ * The {@code PortfolioTest} class contains unit tests for all
+ * the methods of {@link PortfolioImpl} class.
  */
 public class PortfolioTest {
   private Portfolio portfolio;
