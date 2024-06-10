@@ -14,6 +14,7 @@ import java.io.StringReader;
 import java.util.Scanner;
 
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -102,9 +103,10 @@ public class ControllerTest {
     assertTrue(outputParts[30].contains("Added Stock."));
     assertTrue(outputParts[31].contains("Enter command:"));
     assertTrue(outputParts[32].contains("The value is: 113.62"));
-    assertTrue(outputParts[34].contains("Enter command:"));
-    assertTrue(outputParts[35].contains("Added Stock."));
+    assertTrue(outputParts[33].contains("Enter command:"));
+    assertTrue(outputParts[34].contains("Added Stock."));
+    assertTrue(outputParts[35].contains("Enter command:"));
     assertTrue(outputParts[36].contains("The value is: 34.87"));
-    assertTrue(outputParts[37].contains("Thank you for using this program!"));
+    assertEquals(outputParts[37], "Thank you for using this program!");
   }
 }
