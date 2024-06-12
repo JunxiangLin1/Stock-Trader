@@ -30,6 +30,36 @@ public class PortfolioImpl implements Portfolio {
   }
 
   @Override
+  public void buyShares(String ticker, int shares) {
+    if (shares <= 0) {
+      throw new IllegalArgumentException("Shares to buy must be greater than zero.");
+    }
+    if (this.stocks.containsKey(ticker)) {
+      Stock stock = this.stocks.get(ticker);
+      stock.setShares(stock.getShares() + shares);
+    } else {
+      Stock newStock = new StockImpl(ticker, shares); // stockImpl or simpleStock?
+      this.stocks.put(ticker, newStock);
+    }
+  }
+
+  @Override
+  public void sellStock(String ticker, int shares) {
+    if (!this.stocks.containsKey(ticker)) {
+      throw new IllegalArgumentException("Stock not in portfolio.");
+    }
+    Stock stock = this.stocks.get(ticker);
+    int currentShares = stock.getShares();
+    if (shares > currentShares) {
+      throw new IllegalArgumentException("Not enough shares to sell.");
+    }
+    stock.setShares(currentShares - shares);
+    if (stock.getShares() == 0) {
+      this.stocks.remove(ticker);
+    }
+  }
+
+  @Override
   public Stock getStock(String ticker) {
     if (!this.stocks.containsKey(ticker)) {
       throw new IllegalArgumentException("Not in list bitch");
@@ -62,6 +92,30 @@ public class PortfolioImpl implements Portfolio {
   @Override
   public int hashCode() {
     return Objects.hash(stocks);
+  }
+
+  @Override
+  public String getComposition() {
+    StringBuilder composition = new StringBuilder();
+    for (Stock stock : stocks.values()) {
+      composition.append("Stock: ")
+              .append(stock.getTicker())
+              .append(", Shares: ")
+              .append(stock.getShares())
+              .append("\n");
+    }
+    return composition.toString();
+  }
+
+  @Override
+  public String getValueDistribution(Date date) {
+    StringBuilder distribution = new StringBuilder();
+    distribution.append("Individual Stock Values:\n");
+    for (Stock stock : stocks.values()) {
+      double stockValue = stock.getClose(date) * stock.getShares();
+      distribution.append("Stock: ").append(stock.getTicker()).append(", Value: $").append(stockValue).append("\n");
+    }
+    return distribution.toString();
   }
 
 }

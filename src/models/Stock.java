@@ -82,4 +82,6 @@ public interface Stock {
    * @return the closing price
    */
   double getClose(Date day);
+
+  void setShares(int shareAmount);
 }

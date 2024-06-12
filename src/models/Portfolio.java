@@ -31,4 +31,11 @@ public interface Portfolio {
    */
   double getValue(Date date);
 
+  void sellStock(String ticker, int shares);
+
+  void buyShares(String ticker, int shares);
+
+  String getComposition();
+
+  String getValueDistribution(Date date);
 }

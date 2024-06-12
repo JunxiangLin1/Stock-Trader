@@ -75,4 +75,9 @@ public class SimpleStock implements Stock {
   public double getVolume(Date day) {
     return this.data.get(day).get(3);
   }
+
+  @Override
+  public void setShares(int shareAmount) {
+    this.shares = shareAmount;
+  }
 }

@@ -8,8 +8,12 @@ import controllers.commands.AddStockToPortfolio;
 import controllers.commands.AnalyzeGainOrLoss;
 import controllers.commands.AnalyzeXDayCrossover;
 import controllers.commands.AnalyzeXDayMovingAverage;
+import controllers.commands.BuyStock;
+import controllers.commands.Composition;
 import controllers.commands.CreatePortfolio;
+import controllers.commands.Distribution;
 import controllers.commands.GetValue;
+import controllers.commands.SellStock;
 import models.User;
 import views.GameView;
 
@@ -89,6 +93,18 @@ public class StockGameController {
       case "get-value":
         new GetValue(sc, user, this.view).execute();
         break;
+      case "buy-shares":
+        new BuyStock(sc, user, this.view).execute();
+        break;
+      case "sell-shares":
+        new SellStock(sc, user, this.view).execute();
+        break;
+      case "composition":
+        new Composition(sc, user, this.view).execute();
+        break;
+      case "distribution-of-value":
+        new Distribution(sc, user, this.view).execute();
+        break;
       case "menu":
         welcomeMessage();
         printMenu();
@@ -118,7 +134,11 @@ public class StockGameController {
     writeMessage("create-portfolio portfolio-name "
             + "(create a portfolio of the given name)");
     writeMessage("add-stock-to-portfolio portfolio-name stock-ticker share amount"
-            + "(adds a stock of the given ticker to the designated portfolio)");
+            + "(adds a stock of the given ticker to the designated portfolio)"); //consider removing this
+    writeMessage("buy-shares portfolio-name stock-ticker share amount"
+            + "(adds a stock of the given ticker and share amount to the designated portfolio)");
+    writeMessage("sell-shares portfolio-name stock-ticker share amount"
+            + "(sells a stock of the given ticker and share amount from the designated portfolio)");
     writeMessage("analyze-gain-or-loss portfolio-name stock-ticker start-date(YYYY-MM-DD) "
             + "end-date(YYYY-MM-DD) "
             + "(analyses whether or not the given stock increased in price within the date range)");
@@ -131,6 +151,10 @@ public class StockGameController {
             + "x-day moving average)");
     writeMessage("get-value portfolio-name date(YYYY-MM-DD) "
             + "(returns the value of the inputted portfolio on that day)");
+    writeMessage("distribution-of-value portfolio-name date(YYYY-MM-DD) "
+            + "(returns the value of each individual stock of the inputted portfolio on that day)");
+    writeMessage("composition portfolio-name "
+            + "(returns all stocks and share amount for each stock for the inputted portfolio)");
     writeMessage("menu (Print supported instruction list)");
     writeMessage("exit (quit the program) ");
   }

@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import models.Date;
 import models.Portfolio;
 import models.Stock;
 import models.impl.DateImpl;
@@ -31,6 +32,56 @@ public class PortfolioTest {
     portfolio.addStock(stock1);
     assertEquals(stock1, portfolio.getStock("AAPL"));
   }
+
+  @Test
+  public void testSellSharesWorks() {
+    portfolio.addStock(stock1);
+    portfolio.sellStock("AAPL", 4);
+    assertEquals(6, portfolio.getStock("AAPL").getShares());
+  }
+
+  @Test
+  public void testBuySharesWorks() {
+    portfolio.addStock(stock1);
+    portfolio.buyShares("AAPL", 4);
+    assertEquals(14, portfolio.getStock("AAPL").getShares());
+  }
+
+  @Test
+  public void testPrintCompositionWorks() {
+    portfolio.addStock(stock1);
+    portfolio.addStock(stock2);
+    String expectedComposition = "Stock: GOOG, Shares: 5\n"
+            + "Stock: AAPL, Shares: 10\n";
+    assertEquals(expectedComposition, portfolio.getComposition());
+  }
+
+  @Test
+  public void testGetValueDistributionWorks() {
+    portfolio.addStock(stock1);
+    portfolio.addStock(stock2);
+    String expectedComposition = "Stock: GOOG, Shares: 5\n"
+            + "Stock: AAPL, Shares: 10\n";
+    assertEquals(expectedComposition, portfolio.getComposition());
+  }
+
+
+  @Test
+  public void testGetValueDistribution() {
+    stock1.addData(new DateImpl("2023-01-01"), 100.0, 110.0, 90.0, 100.0, 1000.0);
+    stock2.addData(new DateImpl("2023-01-01"), 200.0, 220.0, 180.0, 200.0, 2000.0);
+    portfolio.addStock(stock1);
+    portfolio.addStock(stock2);
+
+
+    String expected =
+            "Individual Stock Values:\n" +
+            "Stock: GOOG, Value: $1000.0\n" +
+            "Stock: AAPL, Value: $1000.0\n";
+    String actual = portfolio.getValueDistribution(new DateImpl("2023-01-01"));
+    assertEquals(expected, actual);
+  }
+
 
   @Test
   public void testGetStock() {
