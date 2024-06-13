@@ -16,7 +16,7 @@ public class StockImpl extends SimpleStock {
    * @param ticker the ticker symbol of the stock
    * @param shares the number of shares
    */
-  public StockImpl(String ticker, int shares) {
+  public StockImpl(String ticker, double shares) {
     super(ticker, shares);
     new PopulateData().apply(this);
   }

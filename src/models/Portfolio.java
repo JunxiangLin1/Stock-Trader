@@ -1,11 +1,7 @@
 package models;
 
-/**
- * This interface represents a Portfolio which can hold multiple stocks.
- * It provides methods to add stocks, retrieve a specific stock by its ticker,
- * and calculate the total value of the portfolio on a given date.
- */
 public interface Portfolio {
+
 
   /**
    * Adds a stock to the portfolio.
@@ -31,11 +27,9 @@ public interface Portfolio {
    */
   double getValue(Date date);
 
-  void sellStock(String ticker, int shares);
-
-  void buyShares(String ticker, int shares);
-
   String getComposition();
 
   String getValueDistribution(Date date);
+
+
 }

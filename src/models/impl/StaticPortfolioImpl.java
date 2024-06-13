@@ -5,22 +5,22 @@ import java.util.Map;
 import java.util.Objects;
 
 import models.Date;
-import models.Portfolio;
+import models.StaticPortfolio;
 import models.Stock;
 
 /**
- * Implementation of the {@link Portfolio} interface. This class represents
+ * Implementation of the {@link StaticPortfolio} interface. This class represents
  * a portfolio of stocks, providing methods to add stocks, retrieve stocks by
  * their ticker symbols, and calculate the total value of the portfolio on a given date.
  */
-public class PortfolioImpl implements Portfolio {
+public class StaticPortfolioImpl implements StaticPortfolio {
 
   private Map<String, Stock> stocks;
 
   /**
    * Constructs a {@code PortfolioImpl} object with an empty collection of stocks.
    */
-  public PortfolioImpl() {
+  public StaticPortfolioImpl() {
     this.stocks = new HashMap<>();
   }
 
@@ -44,12 +44,12 @@ public class PortfolioImpl implements Portfolio {
   }
 
   @Override
-  public void sellStock(String ticker, int shares) {
+  public void sellShares(String ticker, double shares) {
     if (!this.stocks.containsKey(ticker)) {
       throw new IllegalArgumentException("Stock not in portfolio.");
     }
     Stock stock = this.stocks.get(ticker);
-    int currentShares = stock.getShares();
+    double currentShares = stock.getShares();
     if (shares > currentShares) {
       throw new IllegalArgumentException("Not enough shares to sell.");
     }
@@ -79,8 +79,8 @@ public class PortfolioImpl implements Portfolio {
 
   @Override
   public boolean equals(Object other) {
-    if (other instanceof PortfolioImpl) {
-      PortfolioImpl otherPortfolioImpl = (PortfolioImpl) other;
+    if (other instanceof StaticPortfolioImpl) {
+      StaticPortfolioImpl otherPortfolioImpl = (StaticPortfolioImpl) other;
       if (this == otherPortfolioImpl) {
         return true;
       }

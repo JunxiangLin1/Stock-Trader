@@ -34,7 +34,7 @@ public interface Stock {
    *
    * @return the number of shares
    */
-  int getShares();
+  double getShares();
 
   /**
    * Gets the ticker symbol of the stock.
@@ -83,5 +83,5 @@ public interface Stock {
    */
   double getClose(Date day);
 
-  void setShares(int shareAmount);
+  void setShares(double shareAmount);
 }

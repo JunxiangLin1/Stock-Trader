@@ -15,7 +15,7 @@ import models.Stock;
 public class SimpleStock implements Stock {
   private final String ticker;
   private final Map<Date, List<Double>> data;
-  private int shares;
+  private double shares;
 
   /**
    * Constructs a {@code StockImpl} object with the specified ticker and number of shares.
@@ -23,7 +23,7 @@ public class SimpleStock implements Stock {
    * @param ticker the ticker symbol of the stock
    * @param shares the number of shares
    */
-  public SimpleStock(String ticker, int shares) {
+  public SimpleStock(String ticker, double shares) {
     this.ticker = ticker;
     this.data = new HashMap<Date, List<Double>>();
     this.shares = shares;
@@ -42,7 +42,7 @@ public class SimpleStock implements Stock {
   }
 
   @Override
-  public int getShares() {
+  public double getShares() {
     return this.shares;
   }
 
@@ -77,7 +77,7 @@ public class SimpleStock implements Stock {
   }
 
   @Override
-  public void setShares(int shareAmount) {
+  public void setShares(double shareAmount) {
     this.shares = shareAmount;
   }
 }

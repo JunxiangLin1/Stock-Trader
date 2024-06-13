@@ -1,11 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import models.Date;
-import models.Portfolio;
+import models.StaticPortfolio;
 import models.Stock;
 import models.impl.DateImpl;
-import models.impl.PortfolioImpl;
+import models.impl.StaticPortfolioImpl;
 import models.impl.SimpleStock;
 
 import static org.junit.Assert.assertEquals;
@@ -13,16 +12,16 @@ import static org.junit.Assert.assertNotEquals;
 
 /**
  * The {@code PortfolioTest} class contains unit tests for all
- * the methods of {@link PortfolioImpl} class.
+ * the methods of {@link StaticPortfolioImpl} class.
  */
 public class PortfolioTest {
-  private Portfolio portfolio;
+  private StaticPortfolio portfolio;
   private Stock stock1;
   private Stock stock2;
 
   @Before
   public void setUp() {
-    portfolio = new PortfolioImpl();
+    portfolio = new StaticPortfolioImpl();
     stock1 = new SimpleStock("AAPL", 10);
     stock2 = new SimpleStock("GOOG", 5);
   }
@@ -36,7 +35,7 @@ public class PortfolioTest {
   @Test
   public void testSellSharesWorks() {
     portfolio.addStock(stock1);
-    portfolio.sellStock("AAPL", 4);
+    portfolio.sellShares("AAPL", 4);
     assertEquals(6, portfolio.getStock("AAPL").getShares());
   }
 
@@ -116,8 +115,8 @@ public class PortfolioTest {
 
   @Test
   public void testEquals() {
-    Portfolio portfolio1 = new PortfolioImpl();
-    Portfolio portfolio2 = new PortfolioImpl();
+    StaticPortfolio portfolio1 = new StaticPortfolioImpl();
+    StaticPortfolio portfolio2 = new StaticPortfolioImpl();
     assertEquals(portfolio1, portfolio2);
     portfolio1.addStock(stock1);
     assertNotEquals(portfolio1, portfolio2);

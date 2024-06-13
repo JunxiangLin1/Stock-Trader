@@ -1,8 +1,6 @@
 package controllers.commands;
 
-import models.Stock;
 import models.User;
-import models.impl.StockImpl;
 import views.GameView;
 
 import java.util.Scanner;
@@ -36,7 +34,7 @@ public class SellStock extends AbstractGameCommand {
     String stockTicker = sc.next();
     int shares = sc.nextInt();
 
-    this.getUser().getPortfolio(portfolioName).sellStock(stockTicker, shares);
+    this.getUser().getPortfolio(portfolioName).sellShares(stockTicker, shares);
 
     writeMessage("Successfully sold " + shares + " shares of " + stockTicker);
   }
