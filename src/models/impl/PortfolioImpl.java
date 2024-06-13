@@ -117,5 +117,4 @@ public class PortfolioImpl implements Portfolio {
     }
     return distribution.toString();
   }
-
 }
