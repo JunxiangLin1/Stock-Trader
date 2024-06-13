@@ -10,3 +10,4 @@ To query their value type "get-value <portfolio-Name> <valid-date in the format 
 
 Dates Supported are May 2012 - December 2024 all open stock dates
 Stocks supported are All valid ticker symbols
+Originally was very error-prone - we now handle the error
