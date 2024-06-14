@@ -18,7 +18,7 @@ import models.impl.DateImpl;
  * A Function that populates the data for a given stock using data from the Alpha Vantage API.
  */
 public class PopulateData implements StockFunction<Stock, Void> {
-  static final String apiKey = "BYAZRVQYKZU9H4X6";
+  static final String apiKey = "O7XGNPGQU35IKLRW";
 
   /**
    * Populates the data for a given stock using data from the Alpha Vantage API.

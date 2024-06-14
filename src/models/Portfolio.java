@@ -1,5 +1,11 @@
 package models;
 
+/**
+ * The {@code Portfolio} interface represents a collection of stocks,
+ * providing methods to manage and retrieve information about stocks within the portfolio.
+ * This interface allows manipulation of stocks in a portfolio, including adding stocks,
+ * retrieving stocks by their ticker symbols, and calculating portfolio values on specific dates.
+ */
 public interface Portfolio {
 
 
@@ -27,8 +33,21 @@ public interface Portfolio {
    */
   double getValue(Date date);
 
+  /**
+   * Retrieves the composition of the portfolio, listing all stocks and their respective shares.
+   *
+   * @return a string representation of the portfolio composition
+   */
   String getComposition();
 
+
+  /**
+   * Retrieves the value distribution of the portfolio on a specific date,
+   * listing individual values of each stock held in the portfolio.
+   *
+   * @param date the date on which the value distribution is to be retrieved
+   * @return a string representation of the value distribution of the portfolio
+   */
   String getValueDistribution(Date date);
 
 

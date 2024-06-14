@@ -8,7 +8,8 @@ import models.impl.DateImpl;
 import views.GameView;
 
 /**
- * The {@code GetValueDistribution} class retrieves and displays the value distribution of a portfolio on a specific date.
+ * The {@code GetValueDistribution} class retrieves and displays the value distribution of
+ * a portfolio on a specific date.
  */
 public class Distribution extends AbstractGameCommand {
 
@@ -32,7 +33,8 @@ public class Distribution extends AbstractGameCommand {
     try {
       Date date = new DateImpl(dateStr);
       String distribution = this.getUser().getPortfolio(portfolioName).getValueDistribution(date);
-      writeMessage("Value distribution of portfolio '" + portfolioName + "' on " + dateStr + ":\n" + distribution);
+      writeMessage("Value distribution of portfolio '" + portfolioName + "' on " + dateStr + ":\n"
+              + distribution);
     } catch (IllegalArgumentException e) {
       writeMessage("Error: " + e.getMessage());
     }

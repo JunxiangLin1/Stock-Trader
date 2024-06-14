@@ -113,7 +113,8 @@ public class StaticPortfolioImpl implements StaticPortfolio {
     distribution.append("Individual Stock Values:\n");
     for (Stock stock : stocks.values()) {
       double stockValue = stock.getClose(date) * stock.getShares();
-      distribution.append("Stock: ").append(stock.getTicker()).append(", Value: $").append(stockValue).append("\n");
+      distribution.append("Stock: ").append(stock.getTicker()).append(", Value: $")
+              .append(stockValue).append("\n");
     }
     return distribution.toString();
   }

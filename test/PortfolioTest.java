@@ -1,9 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import models.DynamicPortfolio;
 import models.StaticPortfolio;
 import models.Stock;
 import models.impl.DateImpl;
+import models.impl.DynamicPortfolioImpl;
 import models.impl.StaticPortfolioImpl;
 import models.impl.SimpleStock;
 
@@ -36,22 +38,22 @@ public class PortfolioTest {
   public void testSellSharesWorks() {
     portfolio.addStock(stock1);
     portfolio.sellShares("AAPL", 4);
-    assertEquals(6, portfolio.getStock("AAPL").getShares());
+    assertEquals(6, portfolio.getStock("AAPL").getShares(), 0.001);
   }
 
   @Test
   public void testBuySharesWorks() {
     portfolio.addStock(stock1);
     portfolio.buyShares("AAPL", 4);
-    assertEquals(14, portfolio.getStock("AAPL").getShares());
+    assertEquals(14, portfolio.getStock("AAPL").getShares(), 0.01);
   }
 
   @Test
   public void testPrintCompositionWorks() {
     portfolio.addStock(stock1);
     portfolio.addStock(stock2);
-    String expectedComposition = "Stock: GOOG, Shares: 5\n"
-            + "Stock: AAPL, Shares: 10\n";
+    String expectedComposition = "Stock: GOOG, Shares: 5.0\n"
+            + "Stock: AAPL, Shares: 10.0\n";
     assertEquals(expectedComposition, portfolio.getComposition());
   }
 
@@ -59,8 +61,8 @@ public class PortfolioTest {
   public void testGetValueDistributionWorks() {
     portfolio.addStock(stock1);
     portfolio.addStock(stock2);
-    String expectedComposition = "Stock: GOOG, Shares: 5\n"
-            + "Stock: AAPL, Shares: 10\n";
+    String expectedComposition = "Stock: GOOG, Shares: 5.0\n"
+            + "Stock: AAPL, Shares: 10.0\n";
     assertEquals(expectedComposition, portfolio.getComposition());
   }
 
@@ -122,5 +124,22 @@ public class PortfolioTest {
     assertNotEquals(portfolio1, portfolio2);
     portfolio2.addStock(stock1);
     assertEquals(portfolio1, portfolio2);
+  }
+
+  @Test
+  public void testRebalanceWorks() {
+    StaticPortfolioImpl portfolio = new StaticPortfolioImpl();
+    DynamicPortfolio portfolio1 = new DynamicPortfolioImpl(portfolio);
+    portfolio1.buyShares("AAPL", 10, new DateImpl("2013-05-17"));
+    portfolio1.buyShares("GOOG", 10, new DateImpl("2013-05-17"));
+
+    portfolio1.rebalance(new DateImpl("2013-05-17"), 75, 25);
+    String expected =
+            "Individual Stock Values:\n"
+                    + "Stock: GOOG, Value: $1000.0\n"
+                    + "Stock: AAPL, Value: $1000.0\n";
+    assertEquals(expected, portfolio1.getValueDistribution(new DateImpl("2013-05-17")));
+
+
   }
 }

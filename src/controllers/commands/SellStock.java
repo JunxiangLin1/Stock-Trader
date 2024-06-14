@@ -1,6 +1,7 @@
 package controllers.commands;
 
 import models.User;
+import models.impl.DateImpl;
 import views.GameView;
 
 import java.util.Scanner;
@@ -33,8 +34,9 @@ public class SellStock extends AbstractGameCommand {
     String portfolioName = sc.next();
     String stockTicker = sc.next();
     int shares = sc.nextInt();
+    String date = sc.next();
 
-    this.getUser().getPortfolio(portfolioName).sellShares(stockTicker, shares);
+    this.getUser().getPortfolio(portfolioName).sellShares(stockTicker, shares, new DateImpl(date));
 
     writeMessage("Successfully sold " + shares + " shares of " + stockTicker);
   }

@@ -3,7 +3,8 @@ package models.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import models.StaticPortfolio;
+import models.DynamicPortfolio;
+
 import models.Stock;
 import models.User;
 
@@ -13,7 +14,7 @@ import models.User;
  */
 public class UserImpl implements User {
 
-  private Map<String, StaticPortfolio> portfolios;
+  private Map<String, DynamicPortfolio> portfolios;
 
   /**
    * Constructs a {@code UserImpl} object with an empty portfolio map.
@@ -24,12 +25,12 @@ public class UserImpl implements User {
 
   @Override
   public void createPortfolio(String portfolioName) {
-    this.portfolios.put(portfolioName, new StaticPortfolioImpl());
+    this.portfolios.put(portfolioName, new DynamicPortfolioImpl(new StaticPortfolioImpl()));
   }
 
   @Override
-  public StaticPortfolio getPortfolio(String portfolioName) {
-    return this.portfolios.get(portfolioName);
+  public DynamicPortfolio getPortfolio(String portfolioName) {
+    return (DynamicPortfolio) this.portfolios.get(portfolioName);
   }
 
   @Override

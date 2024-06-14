@@ -1,11 +1,11 @@
 package controllers.commands;
 
-import models.Stock;
 import models.User;
-import models.impl.StockImpl;
+import models.impl.DateImpl;
+
 import views.GameView;
 
-import java.io.IOException;
+
 import java.util.Scanner;
 
 /**
@@ -36,8 +36,9 @@ public class BuyStock extends AbstractGameCommand {
     String portfolioName = sc.next();
     String stockTicker = sc.next();
     int shares = sc.nextInt();
+    String date = sc.next();
 
-    this.getUser().getPortfolio(portfolioName).buyShares(stockTicker, shares);
+    this.getUser().getPortfolio(portfolioName).buyShares(stockTicker, shares, new DateImpl(date));
     writeMessage("Added Shares.");
   }
 }

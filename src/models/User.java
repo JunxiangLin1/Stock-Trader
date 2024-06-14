@@ -19,7 +19,7 @@ public interface User {
    * @param portfolioName the name of the portfolio to retrieve
    * @return the portfolio with the given name
    */
-  StaticPortfolio getPortfolio(String portfolioName);
+  DynamicPortfolio getPortfolio(String portfolioName);
 
   /**
    * Adds a stock to the specified portfolio.

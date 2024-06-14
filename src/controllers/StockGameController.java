@@ -13,6 +13,7 @@ import controllers.commands.Composition;
 import controllers.commands.CreatePortfolio;
 import controllers.commands.Distribution;
 import controllers.commands.GetValue;
+import controllers.commands.Rebalance;
 import controllers.commands.SellStock;
 import models.User;
 import views.GameView;
@@ -54,6 +55,7 @@ public class StockGameController {
     Scanner scanner = new Scanner(readable);
     welcomeMessage();
     while (true) {
+      printMenu();
       writeMessage("Enter command: ");
       String command = scanner.next();
       if (command.equalsIgnoreCase("exit")) {
@@ -105,6 +107,9 @@ public class StockGameController {
       case "distribution-of-value":
         new Distribution(sc, user, this.view).execute();
         break;
+      case "re-balance":
+        new Rebalance(sc, user, this.view).execute();
+        break;
       case "menu":
         welcomeMessage();
         printMenu();
@@ -134,7 +139,7 @@ public class StockGameController {
     writeMessage("create-portfolio portfolio-name "
             + "(create a portfolio of the given name)");
     writeMessage("add-stock-to-portfolio portfolio-name stock-ticker share amount"
-            + "(adds a stock of the given ticker to the designated portfolio)"); //consider removing this
+            + "(adds a stock of the given ticker to the designated portfolio)");
     writeMessage("buy-shares portfolio-name stock-ticker share amount"
             + "(adds a stock of the given ticker and share amount to the designated portfolio)");
     writeMessage("sell-shares portfolio-name stock-ticker share amount"
@@ -155,6 +160,9 @@ public class StockGameController {
             + "(returns the value of each individual stock of the inputted portfolio on that day)");
     writeMessage("composition portfolio-name "
             + "(returns all stocks and share amount for each stock for the inputted portfolio)");
+    writeMessage("re-balance portfolio-name date(YYYY-MM-DD) weight1, weight2, etc 'end' "
+            + "re-balances the portfolio to have the correct values and the shares that match those " +
+            "values");
     writeMessage("menu (Print supported instruction list)");
     writeMessage("exit (quit the program) ");
   }
@@ -166,7 +174,6 @@ public class StockGameController {
    */
   protected void welcomeMessage() throws IllegalStateException {
     writeMessage("Welcome to the Stock Game!");
-    printMenu();
   }
 
   /**

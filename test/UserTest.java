@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import models.StaticPortfolio;
+import models.DynamicPortfolio;
 import models.Stock;
 import models.impl.StaticPortfolioImpl;
 import models.impl.SimpleStock;
@@ -25,27 +25,27 @@ public class UserTest {
   @Test
   public void testCreatePortfolio() {
     user.createPortfolio("Portfolio1");
-    StaticPortfolio portfolio = user.getPortfolio("Portfolio1");
+    DynamicPortfolio portfolio = user.getPortfolio("Portfolio1");
     assertEquals(new StaticPortfolioImpl(), portfolio);
   }
 
   @Test
   public void testGetPortfolio() {
     user.createPortfolio("Portfolio1");
-    StaticPortfolio portfolio = user.getPortfolio("Portfolio1");
+    DynamicPortfolio portfolio = user.getPortfolio("Portfolio1");
     assertEquals(new StaticPortfolioImpl(), portfolio);
   }
 
   @Test
   public void testGetPortfolioForNonExistentPortfolio() {
-    StaticPortfolio portfolio = user.getPortfolio("NonExistentPortfolio");
+    DynamicPortfolio portfolio = user.getPortfolio("NonExistentPortfolio");
     assertNull(portfolio);
   }
 
   @Test
   public void testAddStockToPortfolio() {
     user.createPortfolio("Portfolio1");
-    StaticPortfolio portfolio = user.getPortfolio("Portfolio1");
+    DynamicPortfolio portfolio = user.getPortfolio("Portfolio1");
     Stock stock = new SimpleStock("AAPL", 10);
     user.addStockToPortfolio("Portfolio1", stock);
     assertEquals(stock, portfolio.getStock("AAPL"));

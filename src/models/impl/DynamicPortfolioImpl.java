@@ -2,7 +2,7 @@ package models.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 import models.Date;
 import models.DynamicPortfolio;
@@ -10,11 +10,23 @@ import models.OrderType;
 import models.Stock;
 import models.StockOrder;
 
+/**
+ * Implementation of the {@link DynamicPortfolio} interface.
+ * <p>
+ * This class represents a dynamic portfolio that allows buying and selling stocks
+ * based on predefined orders and rebalancing the portfolio based on specified weights.
+ */
 public class DynamicPortfolioImpl implements DynamicPortfolio {
+
   StaticPortfolioImpl portfolio;
 
   List<StockOrder> stockOrders;
 
+  /**
+   * Constructs a {@code DynamicPortfolioImpl} object with an initial static portfolio.
+   *
+   * @param portfolio the static portfolio to initialize this dynamic portfolio
+   */
   public DynamicPortfolioImpl(StaticPortfolioImpl portfolio) {
     this.portfolio = portfolio;
     this.stockOrders = new ArrayList<>();
@@ -56,7 +68,8 @@ public class DynamicPortfolioImpl implements DynamicPortfolio {
       if (date.compareTo(stockOrder.getDate()) <= 0
               && stock.equals(stockOrder.getTicker())) {
         totalValue += (stockOrder.getOrderType() == OrderType.BUY ? 1 : -1)
-                * (new StockImpl(stockOrder.getTicker(), 0).getClose(date) * stockOrder.getShares());
+                * (new StockImpl(stockOrder.getTicker(), 0).getClose(date)
+                * stockOrder.getShares());
       }
     }
     return totalValue;
@@ -71,8 +84,8 @@ public class DynamicPortfolioImpl implements DynamicPortfolio {
       double difference = this.getStockValueAtDate(stock, date) - totalValue * weight[i] / 100;
       double singleStockValue = new StockImpl(stock, 0).getClose(date);
       if (difference < 0) {
-        this.buyShares(stock, (int) Math.ceil(-1 * difference/singleStockValue), date);
-        difference += singleStockValue * (int) Math.ceil(-1 * difference/singleStockValue);
+        this.buyShares(stock, (int) Math.ceil(-1 * difference / singleStockValue), date);
+        difference += singleStockValue * (int) Math.ceil(-1 * difference / singleStockValue);
       }
       this.sellShares(stock, difference / singleStockValue, date);
     }
