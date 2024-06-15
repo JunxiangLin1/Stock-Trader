@@ -61,4 +61,6 @@ public interface Date {
    */
   void advance(int days);
 
+  int daysUntil(Date other);
+
 }

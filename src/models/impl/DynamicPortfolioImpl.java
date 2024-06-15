@@ -12,7 +12,6 @@ import models.StockOrder;
 
 /**
  * Implementation of the {@link DynamicPortfolio} interface.
- * <p>
  * This class represents a dynamic portfolio that allows buying and selling stocks
  * based on predefined orders and rebalancing the portfolio based on specified weights.
  */
@@ -112,4 +111,107 @@ public class DynamicPortfolioImpl implements DynamicPortfolio {
     this.portfolio.buyShares(ticker, shares);
     this.stockOrders.add(new StockOrderImpl(OrderType.BUY, ticker, shares, date));
   }
+
+  private String performanceDuringMonth(Date date) {
+    Date lastDate = new DateImpl(date.toString());
+    while (lastDate.getMonth() == date.getMonth()) {
+      lastDate.advance(1);
+    }
+    Stock stock = new StockImpl("META", 0);
+    boolean dateNotFound = true;
+    while (dateNotFound) {
+      System.out.println("finding date");
+      lastDate.advance(-1);
+      try {
+        stock.getClose(lastDate);
+        dateNotFound = false;
+      } catch (Exception ignored) {
+        // Ignore as stock has been found
+      }
+    }
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < this.getValue(lastDate) / 1000; i++) {
+      result.append('*');
+    }
+    return result.toString();
+  }
+
+  private String performanceDuringYear(Date date) {
+    Date lastDate = new DateImpl(date.toString());
+    while (lastDate.getYear() == date.getYear()) {
+      lastDate.advance(1);
+    }
+    Stock stock = new StockImpl("META", 0);
+    boolean dateNotFound = true;
+    while (dateNotFound) {
+      lastDate.advance(-1);
+      System.out.println("finding date");
+      try {
+        stock.getClose(lastDate);
+        dateNotFound = false;
+      } catch (Exception ignored) {
+        // Ignore as stock has been found
+      }
+    }
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < this.getValue(lastDate) / 1000; i++) {
+      result.append('*');
+    }
+    return result.toString();
+  }
+
+  private String performanceDuringDay(Date date) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < this.getValue(date) / 1000; i++) {
+      result.append('*');
+    }
+    return result.toString();
+  }
+
+
+  @Override
+  public String performanceOverTime(Date start, Date end) {
+    StringBuilder result = new StringBuilder();
+    int totalDays = start.daysUntil(end);
+    Date tempStart = new DateImpl(start.toString());
+    System.out.println("starts here");
+    if (totalDays / 30 >= 12 * 5) {
+      // Go by year
+      System.out.println("while 1 starts here");
+      while (tempStart.compareTo(end) < 0) {
+        System.out.println("starts here");
+        result.append(tempStart.toString()).append(": ")
+                .append(this.performanceDuringYear(tempStart))
+                .append(System.lineSeparator());
+        tempStart.advance(365);
+      }
+    } else if (totalDays / 30 >= 5) {
+      int monthSkip = 1;
+      if (totalDays / 30 > 30) {
+        monthSkip = 2;
+      }
+      System.out.println("while 2 starts here");
+      while (tempStart.compareTo(end) < 0) {
+        System.out.println("starts here");
+        result.append(tempStart.toString()).append(": ")
+                .append(this.performanceDuringMonth(tempStart))
+                .append(System.lineSeparator());
+        tempStart.advance(monthSkip * 30);
+      }
+      // Go by month
+    } else if (totalDays / 30 >= 0) {
+      int daySkip = (int) Math.ceil((double)totalDays / 30);
+      System.out.println("while 3 starts here");
+      while (tempStart.compareTo(end) < 0) {
+        System.out.println("starts here");
+        result.append(tempStart.toString()).append(": ")
+                .append(this.performanceDuringDay(tempStart))
+                .append(System.lineSeparator());
+        tempStart.advance(daySkip);
+      }
+    }
+    result.append("Scale: * = $1000");
+    return result.toString();
+  }
+
 }

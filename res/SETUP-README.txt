@@ -1,3 +1,6 @@
+To run the jar file click the jar file.
+Run the Jar file and then follow instructions below.
+
 To create a portfolio type "create-portfolio <portfolio-Name>"
 Then press enter
 To add a stock type "add-stock-to-portfolio <portfolio-Name> <valid-Stock_name>"

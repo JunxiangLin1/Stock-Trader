@@ -6,9 +6,11 @@ import models.StockOrder;
 
 /**
  * Implementation of the {@link StockOrder} interface.
- * <p>
- * This class represents an order for a specific stock, including details such as order type (BUY or SELL),
- * ticker symbol, number of shares, and order date.
+ * This class represents an order for a specific stock, including details such as order type
+ * (BUY or SELL),
+ * ticker symbol,
+ * number of shares,
+ * and order date.
  */
 public class StockOrderImpl implements StockOrder {
   OrderType orderType;

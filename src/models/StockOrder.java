@@ -3,7 +3,6 @@ package models;
 /**
  * The {@code StockOrder} interface represents an order to buy or sell a specific amount of stock
  * on a particular date.
- * <p>
  * It provides methods to retrieve information about the order type (buy or sell),
  * the stock ticker symbol, the number of shares, and the date of the order.
  */

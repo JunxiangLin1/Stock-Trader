@@ -13,6 +13,7 @@ import controllers.commands.Composition;
 import controllers.commands.CreatePortfolio;
 import controllers.commands.Distribution;
 import controllers.commands.GetValue;
+import controllers.commands.Performance;
 import controllers.commands.Rebalance;
 import controllers.commands.SellStock;
 import models.User;
@@ -110,6 +111,9 @@ public class StockGameController {
       case "re-balance":
         new Rebalance(sc, user, this.view).execute();
         break;
+      case "performance":
+        new Performance(sc, user, this.view).execute();
+        break;
       case "menu":
         welcomeMessage();
         printMenu();
@@ -161,8 +165,9 @@ public class StockGameController {
     writeMessage("composition portfolio-name "
             + "(returns all stocks and share amount for each stock for the inputted portfolio)");
     writeMessage("re-balance portfolio-name date(YYYY-MM-DD) weight1, weight2, etc 'end' "
-            + "re-balances the portfolio to have the correct values and the shares that match those " +
-            "values");
+            + "re-balances the portfolio to have the correct values and the " +
+            "shares that match those "
+            + "values");
     writeMessage("menu (Print supported instruction list)");
     writeMessage("exit (quit the program) ");
   }

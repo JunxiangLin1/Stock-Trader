@@ -44,4 +44,6 @@ public interface DynamicPortfolio extends Portfolio {
    */
   void buyShares(String ticker, int shares, Date date);
 
+  String performanceOverTime(Date start, Date end);
+
 }

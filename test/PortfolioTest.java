@@ -76,9 +76,9 @@ public class PortfolioTest {
 
 
     String expected =
-            "Individual Stock Values:\n" +
-            "Stock: GOOG, Value: $1000.0\n" +
-            "Stock: AAPL, Value: $1000.0\n";
+            "Individual Stock Values:\n"
+                    + "Stock: GOOG, Value: $1000.0\n"
+                    + "Stock: AAPL, Value: $1000.0\n";
     String actual = portfolio.getValueDistribution(new DateImpl("2023-01-01"));
     assertEquals(expected, actual);
   }
@@ -139,7 +139,16 @@ public class PortfolioTest {
                     + "Stock: GOOG, Value: $1000.0\n"
                     + "Stock: AAPL, Value: $1000.0\n";
     assertEquals(expected, portfolio1.getValueDistribution(new DateImpl("2013-05-17")));
-
-
   }
+
+  @Test
+  public void testPerformanceOverTimeWorks() {
+    StaticPortfolioImpl portfolio = new StaticPortfolioImpl();
+    DynamicPortfolio portfolio1 = new DynamicPortfolioImpl(portfolio);
+    portfolio1.buyShares("AAPL", 10, new DateImpl("2013-05-17"));
+    portfolio1.buyShares("GOOG", 10, new DateImpl("2013-05-17"));
+    assertEquals("", portfolio1.performanceOverTime(new DateImpl("2014-05-17"),
+            new DateImpl("2015-05-17")));
+  }
+
 }

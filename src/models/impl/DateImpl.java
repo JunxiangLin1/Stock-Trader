@@ -152,4 +152,15 @@ public class DateImpl implements Date {
   public String toString() {
     return String.format("%04d-%02d-%02d", this.year, this.month, this.day);
   }
+
+  @Override
+  public int daysUntil(Date other) {
+    Date temp = new DateImpl(this.toString());
+    int days = 0;
+    while (this.compareTo(other) < 0) {
+      temp.advance(1);
+      days++;
+    }
+    return days;
+  }
 }
