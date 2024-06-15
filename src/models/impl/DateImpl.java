@@ -157,7 +157,7 @@ public class DateImpl implements Date {
   public int daysUntil(Date other) {
     Date temp = new DateImpl(this.toString());
     int days = 0;
-    while (this.compareTo(other) < 0) {
+    while (temp.compareTo(other) < 0) {
       temp.advance(1);
       days++;
     }
