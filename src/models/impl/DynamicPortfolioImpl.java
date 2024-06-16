@@ -53,7 +53,7 @@ public class DynamicPortfolioImpl implements DynamicPortfolio {
   private List<String> getOrderedStocksAtDate(Date date) {
     List<String> stockList = new ArrayList<>();
     for (StockOrder stockOrder : stockOrders) {
-      if (date.compareTo(stockOrder.getDate()) <= 0
+      if (date.compareTo(stockOrder.getDate()) >= 0
               && !stockList.contains(stockOrder.getTicker())) {
         stockList.add(stockOrder.getTicker());
       }
@@ -64,7 +64,8 @@ public class DynamicPortfolioImpl implements DynamicPortfolio {
   private double getStockValueAtDate(String stock, Date date) {
     double totalValue = 0;
     for (StockOrder stockOrder : stockOrders) {
-      if (date.compareTo(stockOrder.getDate()) <= 0
+      System.out.println(stockOrder.getTicker() + " " + stockOrder.getDate());
+      if (date.compareTo(stockOrder.getDate()) >= 0
               && stock.equals(stockOrder.getTicker())) {
         totalValue += (stockOrder.getOrderType() == OrderType.BUY ? 1 : -1)
                 * (new StockImpl(stockOrder.getTicker(), 0).getClose(date)
@@ -130,6 +131,7 @@ public class DynamicPortfolioImpl implements DynamicPortfolio {
       }
     }
     StringBuilder result = new StringBuilder();
+    System.out.println(this.getValue(lastDate));
     for (int i = 0; i < this.getValue(lastDate) / 1000; i++) {
       result.append('*');
     }
@@ -198,7 +200,6 @@ public class DynamicPortfolioImpl implements DynamicPortfolio {
                 .append(System.lineSeparator());
         tempStart.advance(monthSkip * 30);
       }
-      // Go by month
     } else if (totalDays / 30 >= 0) {
       int daySkip = (int) Math.ceil((double)totalDays / 30);
       System.out.println("while 3 starts here");
