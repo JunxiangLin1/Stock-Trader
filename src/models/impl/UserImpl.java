@@ -1,6 +1,8 @@
 package models.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import models.DynamicPortfolio;
@@ -36,5 +38,10 @@ public class UserImpl implements User {
   @Override
   public void addStockToPortfolio(String portfolioName, Stock stock) {
     this.getPortfolio(portfolioName).addStock(stock);
+  }
+
+  @Override
+  public List<String> getAllPortfolioNames() {
+    return new ArrayList<>(this.portfolios.keySet());
   }
 }

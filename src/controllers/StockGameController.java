@@ -22,7 +22,7 @@ import views.GameView;
 /**
  * The {@code StockGameController} class handles user input and commands for the stock application.
  */
-public class StockGameController {
+public class StockGameController implements Controller {
 
   private final Readable readable;
 
@@ -129,7 +129,7 @@ public class StockGameController {
    * @param message the message to display
    * @throws IllegalStateException if an I/O error occurs
    */
-  protected void writeMessage(String message) throws IllegalStateException {
+  public void writeMessage(String message) throws IllegalStateException {
     view.displayMessage(message + System.lineSeparator());
   }
 
@@ -138,7 +138,7 @@ public class StockGameController {
    *
    * @throws IllegalStateException if an I/O error occurs
    */
-  protected void printMenu() throws IllegalStateException {
+  public void printMenu() throws IllegalStateException {
     writeMessage("Supported user instructions are: ");
     writeMessage("create-portfolio portfolio-name "
             + "(create a portfolio of the given name)");
@@ -177,7 +177,7 @@ public class StockGameController {
    *
    * @throws IllegalStateException if an I/O error occurs
    */
-  protected void welcomeMessage() throws IllegalStateException {
+  public void welcomeMessage() throws IllegalStateException {
     writeMessage("Welcome to the Stock Game!");
   }
 
@@ -186,7 +186,7 @@ public class StockGameController {
    *
    * @throws IllegalStateException if an I/O error occurs
    */
-  protected void farewellMessage() throws IllegalStateException {
+  public void farewellMessage() throws IllegalStateException {
     writeMessage("Thank you for using this program!");
   }
 }

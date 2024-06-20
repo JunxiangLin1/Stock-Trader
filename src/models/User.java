@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 /**
  * This interface represents a user in the stock game application.
  * A user can create portfolios, retrieve existing portfolios, and add stocks to portfolios.
@@ -29,5 +31,7 @@ public interface User {
    */
   void addStockToPortfolio(String portfolioName, Stock stock);
 
+
+  List<String> getAllPortfolioNames();
 
 }

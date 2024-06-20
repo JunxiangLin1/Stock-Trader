@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 
 
+import javax.swing.*;
+
 import controllers.StockGameController;
 
 
